@@ -1,0 +1,14 @@
+<div class="stock">
+  <div class="cover-list-product">
+    <div class="cover-card-product" *ngFor="let item of porductList">
+      <mat-card class="card-product">
+        <ul>
+          <li>Product Name : {{ item.productName }}</li>
+          <li>Code : {{ item.productCode }}</li>
+          <li>Price : {{ item.price }}</li>
+          <li>Quatity : {{ item.qty }}</li>
+        </ul>
+      </mat-card>
+    </div>
+  </div>
+</div>

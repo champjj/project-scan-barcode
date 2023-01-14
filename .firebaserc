@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "fir-scan-barcode",
+    "y": "fir-scan-barcode"
+  },
+  "targets": {},
+  "etags": {}
+}

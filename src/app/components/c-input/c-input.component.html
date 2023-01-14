@@ -1,0 +1,16 @@
+<div class="field">
+  <!-- <label class="label">{{ label }}</label
+  ><span *ngIf="required" style="color: #dd191e">*</span> -->
+  <div class="control">
+    <mat-form-field class="example-full-width">
+      <input
+        matInput
+        [id]="id"
+        [formControl]="control"
+        [type]="inputType"
+        [required]="required"
+        [placeholder]="placeholder"
+      />
+    </mat-form-field>
+  </div>
+</div>

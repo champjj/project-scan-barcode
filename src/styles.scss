@@ -1,1 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "Arial-Rounded-MT";
+  src: local("Arial-Rounded-MT"),
+    url(./assets/font/Arial-Rounded-MT.Ttf) format("truetype");
+}
+html,
+* {
+  font-family: "Arial-Rounded-MT", Roboto, "Helvetica Neue", sans-serif;
+}
+body {
+  height: 100%;
+  font-family: "Arial-Rounded-MT", Roboto, "Helvetica Neue", sans-serif;
+}
+body {
+  margin: 0;
+  font-family: "Arial-Rounded-MT", Roboto, "Helvetica Neue", sans-serif;
+
+  //// custom style
+  .mat-flat-button.mat-primary.mat-button-disabled,
+  .mat-flat-button.mat-accent.mat-button-disabled,
+  .mat-flat-button.mat-warn.mat-button-disabled,
+  .mat-flat-button.mat-button-disabled.mat-button-disabled,
+  .mat-raised-button.mat-primary.mat-button-disabled,
+  .mat-raised-button.mat-accent.mat-button-disabled,
+  .mat-raised-button.mat-warn.mat-button-disabled,
+  .mat-raised-button.mat-button-disabled.mat-button-disabled,
+  .mat-fab.mat-primary.mat-button-disabled,
+  .mat-fab.mat-accent.mat-button-disabled,
+  .mat-fab.mat-warn.mat-button-disabled,
+  .mat-fab.mat-button-disabled.mat-button-disabled,
+  .mat-mini-fab.mat-primary.mat-button-disabled,
+  .mat-mini-fab.mat-accent.mat-button-disabled,
+  .mat-mini-fab.mat-warn.mat-button-disabled,
+  .mat-mini-fab.mat-button-disabled.mat-button-disabled {
+    color: white;
+    font-size: 16px;
+  }
+  .mat-flat-button,
+  .mat-raised-button,
+  .mat-fab,
+  .mat-mini-fab {
+    font-size: 16px;
+    color: white;
+    background-color: black;
+  }
+  .mat-form-field-appearance-legacy .mat-form-field-underline {
+    height: 1px;
+  }
+  .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: rgb(0 0 0 / 18%);
+  }
+  .btn-back {
+    background-color: gray;
+  }
+}

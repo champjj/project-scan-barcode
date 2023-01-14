@@ -1,0 +1,31 @@
+<div class="menu-page">
+  <mat-card class="card-info-user">
+    <img src="../../../assets/images/default_user.png" alt="" />
+    <ul>
+      <li>
+        <label>shop name</label>
+      </li>
+      <li>
+        <label style="color: darkgray">username</label>
+      </li>
+    </ul>
+    <div class="cover-setting" (click)="onChangePage('setting')">
+      <img
+        class="image-setting-size"
+        src="../../../assets/images/more_vert.png"
+        alt=""
+      />
+    </div>
+  </mat-card>
+
+  <div class="cover-menu-card">
+    <ng-container *ngFor="let item of menuArray">
+      <mat-card class="menu-card" (click)="onChangePage(item.link)">
+        <label>
+          {{ item.menuName }}
+        </label>
+        <img class="menu-image" src="{{ item.image }}" alt="" />
+      </mat-card>
+    </ng-container>
+  </div>
+</div>

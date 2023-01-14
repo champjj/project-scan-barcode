@@ -1,0 +1,14 @@
+<div class="edit-product">
+  <div class="cover-list-product">
+    <div class="cover-card-product" *ngFor="let item of productList">
+      <mat-card class="card-product">
+        <ul>
+          <li>Product Name : {{ item.productName }}</li>
+          <li>Code : {{ item.productCode }}</li>
+          <li>Price : {{ item.price }}</li>
+        </ul>
+        <button (click)="openDialog(item)" mat-raised-button>Edit</button>
+      </mat-card>
+    </div>
+  </div>
+</div>
