@@ -1,6 +1,7 @@
 <div class="sell-product">
   <div class="container">
     <h1>ngx-scanner-qrcode</h1>
+    <h1>{{ value }}</h1>
 
     <!-- devices -->
     <div class="row">
@@ -14,39 +15,12 @@
           <option
             *ngFor="let c of action.devices.value; let i = index"
             [ngValue]="c.deviceId"
-            [selected]="i == 1"
+            [selected]="i == 0"
           >
             {{ c.label }}
           </option>
         </select>
       </div>
-
-      <!-- <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 my-1">
-        <select
-          [ngModel]="'utf-8'"
-          (ngModelChange)="action.decode = $event"
-          class="form-select form-select-sm"
-        >
-          <option value="utf-8" [selected]="action.decode == 'utf-8'">
-            UTF-8
-          </option>
-          <option
-            value="iso-8859-15"
-            [selected]="action.decode == 'iso-8859-15'"
-          >
-            ISO-8859-15
-          </option>
-          <option
-            value="windows-1252"
-            [selected]="action.decode == 'windows-1252'"
-          >
-            Windows-1252
-          </option>
-          <option value="macintosh" [selected]="action.decode == 'macintosh'">
-            Macintosh
-          </option>
-        </select>
-      </div> -->
     </div>
 
     <!-- ngx-scanner-qrcode -->
