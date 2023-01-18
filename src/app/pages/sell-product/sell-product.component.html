@@ -1,11 +1,25 @@
 <div class="sell-product">
   <barcode-scanner-livestream
-    type="code_128"
+    [type]="[
+      'code_128',
+      'code_39',
+      'code_39_vin',
+      'ean',
+      'ean_extended',
+      'ean_8',
+      'upc',
+      'upc_e',
+      'codabar',
+      'i2of5',
+      '2of5',
+      'code_93'
+    ]"
     (valueChanges)="onValueChanges($event)"
     (started)="(onStarted)"
   ></barcode-scanner-livestream>
-  <div [hidden]="!barcodeValue">
+  <p>barcodeValue : {{ barcodeValue }}</p>
+  <!-- <div [hidden]="!barcodeValue">
     {{ barcodeValue }}
-  </div>
+  </div> -->
 </div>
 <!-- 'code_128', 'ean', 'upc', 'upc_e', 'ean_8' -->
