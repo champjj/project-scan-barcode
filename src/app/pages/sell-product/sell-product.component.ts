@@ -18,6 +18,7 @@ export class SellProductComponent {
 
   onValueChanges(result: { codeResult: { code: any } }) {
     this.barcodeValue = result.codeResult.code;
+    alert(result.codeResult.code);
   }
 
   onStarted(started: any) {
