@@ -23,6 +23,7 @@ export class SellProductComponent {
 
   onStarted(started: any) {
     console.log(started);
+    alert(started);
   }
   ngOninit() {}
 }
