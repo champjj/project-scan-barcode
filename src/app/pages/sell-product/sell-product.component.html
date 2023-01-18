@@ -17,9 +17,8 @@
     (valueChanges)="onValueChanges($event)"
     (started)="(onStarted)"
   ></barcode-scanner-livestream>
-  <p>barcodeValue : {{ barcodeValue }}</p>
-  <!-- <div [hidden]="!barcodeValue">
+  <!-- <p>barcodeValue : {{ barcodeValue }}</p> -->
+  <div [hidden]="!barcodeValue">
     {{ barcodeValue }}
-  </div> -->
+  </div>
 </div>
-<!-- 'code_128', 'ean', 'upc', 'upc_e', 'ean_8' -->
