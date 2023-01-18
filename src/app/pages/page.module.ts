@@ -11,13 +11,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 
+import {NgxBarcodeScannerModule} from '@eisberg-labs/ngx-barcode-scanner';
+
 import { SellProductComponent } from './sell-product/sell-product.component';
 import { AddProductComponent } from './add-product/add-product.component';
-import { DialogEditProduct, EditProductComponent } from './edit-product/edit-product.component';
+import {
+  DialogEditProduct,
+  EditProductComponent,
+} from './edit-product/edit-product.component';
 import { StockComponent } from './stock/stock.component';
 import { SettingComponent } from './setting/setting.component';
-
-import { BarcodeScannerLivestreamModule } from 'ngx-barcode-scanner';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,7 @@ import { BarcodeScannerLivestreamModule } from 'ngx-barcode-scanner';
     PageRoutingModule,
     ComponentModule,
     ReactiveFormsModule,
-    BarcodeScannerLivestreamModule,
+    NgxBarcodeScannerModule,
     ///// material
     MatButtonModule,
     MatCardModule,
