@@ -10,7 +10,7 @@
           (ngModelChange)="action.playDevice($event)"
           class="form-select form-select-sm"
         >
-          <option [value]="0" selected>Select device</option>
+          <option [value]="null" selected>Select device</option>
           <option
             *ngFor="let c of action.devices.value; let i = index"
             [ngValue]="c.deviceId"
@@ -58,10 +58,10 @@
   </div>
 
   <ng-container>
-    <span>action.data.value: {{ action.data.value | json }}</span
-    ><!-- value -->
+    <p>{{ value }}</p>
     <br />
-    <span>action.data: {{ action.data | async | json }}</span
-    ><!-- async -->
+    <!-- <span>action.data.value: {{ action.data.value | json }}</span>
+    <br />
+    <span>action.data: {{ action.data | async | json }}</span> -->
   </ng-container>
 </div>
