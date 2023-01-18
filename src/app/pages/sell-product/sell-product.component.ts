@@ -10,7 +10,7 @@ import {
   styleUrls: ['./sell-product.component.scss'],
 })
 export class SellProductComponent {
-  value = '';
+  value: any;
   // https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
   config: ScannerQRCodeConfig = {
     // fps: 1000,
@@ -33,7 +33,7 @@ export class SellProductComponent {
   ngOnInit() {}
 
   onEvent(e: ScannerQRCodeResult[]): void {
-    this.value = e[0].value;
+    this.value = e;
     alert('data' + e[0].value);
     console.log(e);
   }
