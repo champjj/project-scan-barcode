@@ -14,14 +14,14 @@
           <option
             *ngFor="let c of action.devices.value; let i = index"
             [ngValue]="c.deviceId"
-            [selected]="i == 0"
+            [selected]="i == 1"
           >
             {{ c.label }}
           </option>
         </select>
       </div>
 
-      <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 my-1">
+      <!-- <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 my-1">
         <select
           [ngModel]="'utf-8'"
           (ngModelChange)="action.decode = $event"
@@ -46,7 +46,7 @@
             Macintosh
           </option>
         </select>
-      </div>
+      </div> -->
     </div>
 
     <!-- ngx-scanner-qrcode -->
