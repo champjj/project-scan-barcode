@@ -1,7 +1,6 @@
 <div class="sell-product">
   <div class="container">
     <h1>ngx-scanner-qrcode</h1>
-    <h1>{{ value | json }}</h1>
 
     <!-- devices -->
     <div class="row">
@@ -11,7 +10,7 @@
           (ngModelChange)="action.playDevice($event)"
           class="form-select form-select-sm"
         >
-          <option [value]="2" selected>Select device</option>
+          <option [value]="1" selected>Select device</option>
           <option
             *ngFor="let c of action.devices.value; let i = index"
             [ngValue]="c.deviceId"
@@ -57,4 +56,8 @@
       />
     </button>
   </div>
+
+  <ng-container>
+    <h1>{{ value.getValue() }}</h1>
+  </ng-container>
 </div>

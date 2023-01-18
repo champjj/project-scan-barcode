@@ -4,13 +4,14 @@ import {
   ScannerQRCodeSelectedFiles,
   ScannerQRCodeResult,
 } from 'ngx-scanner-qrcode';
+import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-sell-product',
   templateUrl: './sell-product.component.html',
   styleUrls: ['./sell-product.component.scss'],
 })
 export class SellProductComponent {
-  value: any;
+  value = new BehaviorSubject<string>('');
   // https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
   config: ScannerQRCodeConfig = {
     // fps: 1000,
@@ -33,7 +34,7 @@ export class SellProductComponent {
   ngOnInit() {}
 
   onEvent(e: ScannerQRCodeResult[]): void {
-    this.value = e;
+    this.value.next(e[0].value);
     alert('data' + e[0].value);
     console.log(e);
   }
