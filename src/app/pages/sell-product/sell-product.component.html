@@ -58,18 +58,9 @@
   </div>
 
   <ng-container>
-    <h1>{{ value }}</h1>
-
-    <P>{{ check }}</P>
+    <span>action.data.value: {{ action.data.value | json }}</span
+    ><!-- value -->
+    <span>action.data: {{ action.data | async | json }}</span
+    ><!-- async -->
   </ng-container>
-
-  <ngx-scanner-qrcode
-    #actionFile="scanner"
-    (event)="onEvent($event)"
-    [src]="
-      'https://raw.githubusercontent.com/id1945/ngx-scanner-qrcode/master/supported-barcode-types.png'
-    "
-    [config]="config"
-  >
-  </ngx-scanner-qrcode>
 </div>

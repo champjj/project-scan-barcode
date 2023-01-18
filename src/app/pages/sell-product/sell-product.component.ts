@@ -11,7 +11,6 @@ import {
 })
 export class SellProductComponent {
   value = '';
-  check: boolean = false;
   // https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
   config: ScannerQRCodeConfig = {
     // fps: 1000,
@@ -26,18 +25,14 @@ export class SellProductComponent {
     },
   };
 
-  qrCodeResult: ScannerQRCodeSelectedFiles[] = [];
-  qrCodeResult2: ScannerQRCodeSelectedFiles[] = [];
-
   constructor() {}
 
   ngOnInit() {}
 
   onEvent(e: ScannerQRCodeResult[]): void {
     this.value = e[0].value;
-    alert('data' + e[0].value);
+    alert('data' + e);
     console.log(e);
-    !!this.value ? (this.check = true) : (this.check = false);
   }
 
   handle(action: any, fn: string): void {
