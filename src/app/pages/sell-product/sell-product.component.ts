@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { BarcodeScannerLivestreamComponent } from 'ngx-barcode-scanner';
+
 @Component({
   selector: 'app-sell-product',
   templateUrl: './sell-product.component.html',
@@ -15,11 +16,12 @@ export class SellProductComponent {
     this.barcodeScanner.start();
   }
 
-  onValueChanges(result: any) {
+  onValueChanges(result: { codeResult: { code: any } }) {
     this.barcodeValue = result.codeResult.code;
   }
 
   onStarted(started: any) {
     console.log(started);
   }
+  ngOninit() {}
 }

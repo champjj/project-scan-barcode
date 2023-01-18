@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 
-import { BarcodeScannerLivestreamModule } from "ngx-barcode-scanner";
+import { BarcodeScannerLivestreamModule } from 'ngx-barcode-scanner';
 
 import { SellProductComponent } from './sell-product/sell-product.component';
 import { AddProductComponent } from './add-product/add-product.component';

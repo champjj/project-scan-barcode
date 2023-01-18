@@ -5,12 +5,13 @@ import { CInputComponent } from './c-input/c-input.component';
 
 ///// material
 import { MatInputModule } from '@angular/material/input';
+import { CScanBarcodeComponent } from './c-scan-barcode/c-scan-barcode.component';
 
 const COMPONENT = [CInputComponent];
 const MODULES = [ReactiveFormsModule, FormsModule, MatInputModule];
 
 @NgModule({
-  declarations: [...COMPONENT],
+  declarations: [...COMPONENT, CScanBarcodeComponent],
   imports: [CommonModule, ...MODULES],
   exports: [...COMPONENT, ...MODULES],
 })
