@@ -1,9 +1,3 @@
 <div class="sell-product">
-  <barcode-scanner-livestream
-    (valueChanges)="onValueChanges($event)"
-    (started)="(onStarted)"
-  ></barcode-scanner-livestream>
-  <div [hidden]="!barcodeValue">
-    {{ barcodeValue }}
-  </div>
+  <button mat-raised-button (click)="barCode()">scan</button>
 </div>

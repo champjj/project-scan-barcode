@@ -1,29 +1,25 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { BarcodeScannerLivestreamComponent } from 'ngx-barcode-scanner';
-
+import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 @Component({
   selector: 'app-sell-product',
   templateUrl: './sell-product.component.html',
   styleUrls: ['./sell-product.component.scss'],
 })
 export class SellProductComponent {
-  @ViewChild(BarcodeScannerLivestreamComponent)
-  barcodeScanner!: BarcodeScannerLivestreamComponent;
+  value = '';
 
-  barcodeValue: any;
-
-  ngAfterViewInit() {
-    this.barcodeScanner.start();
-  }
-
-  onValueChanges(result: { codeResult: { code: any } }) {
-    this.barcodeValue = result.codeResult.code;
-    alert(result.codeResult.code);
-  }
-
-  onStarted(started: any) {
-    console.log(started);
-    alert(started);
-  }
+  constructor(private barcodeScanner: BarcodeScanner) {}
   ngOninit() {}
+
+  barCode() {
+    this.barcodeScanner
+      .scan()
+      .then((barcodeData) => {
+        this.value = barcodeData.text;
+        console.log('Barcode data', barcodeData);
+      })
+      .catch((err) => {
+        console.log('Error', err);
+      });
+  }
 }

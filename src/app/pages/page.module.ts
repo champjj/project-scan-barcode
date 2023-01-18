@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 
-import { BarcodeScannerLivestreamModule } from 'ngx-barcode-scanner';
+import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 
 import { SellProductComponent } from './sell-product/sell-product.component';
 import { AddProductComponent } from './add-product/add-product.component';
@@ -38,11 +38,12 @@ import { SettingComponent } from './setting/setting.component';
     PageRoutingModule,
     ComponentModule,
     ReactiveFormsModule,
-    BarcodeScannerLivestreamModule,
+
     ///// material
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
   ],
+  providers: [BarcodeScanner],
 })
 export class PageModule {}
