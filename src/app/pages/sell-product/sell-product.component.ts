@@ -6,6 +6,7 @@ import {
   NgxScannerQrcodeComponent,
 } from 'ngx-scanner-qrcode';
 import { tap } from 'rxjs';
+import { IScannerDevice } from 'src/app/@core/models/scanner-models';
 @Component({
   selector: 'app-sell-product',
   templateUrl: './sell-product.component.html',
@@ -92,14 +93,27 @@ export class SellProductComponent implements OnInit {
       .pipe(
         tap(() => {
           this.showData = action.devices._value;
-          const findFacingBack = action!.devices!._value.findIndex(
-            (data: any) => data.label == 'camera2 0, facing back'
-          );
-          this.indexCameraFacingback = findFacingBack;
-          this.deviceIdFacingback = action.devices[findFacingBack]!.deviceId;
-          action.playDevice(action.devices[findFacingBack]!.deviceId);
         })
       )
-      .subscribe(console.log, alert);
+      .subscribe(() => {
+        console.log, alert;
+        this.setCameraFacingback(action, this.showData);
+      });
+  }
+
+  setCameraFacingback(action: any, data: IScannerDevice[]): void {
+    // const findFacingBack = action!.devices!._value.findIndex(
+    //   (data: any) => data.label == 'camera2 0, facing back'
+    // );
+    // this.indexCameraFacingback = findFacingBack;
+    // this.deviceIdFacingback = action.devices[findFacingBack]!.deviceId;
+    // action.playDevice(action.devices[findFacingBack]!.deviceId);
+
+    const findFacingback = data.findIndex(
+      (data: IScannerDevice) => data.label == 'camera2 0, facing back'
+    );
+    this.indexCameraFacingback = findFacingback;
+    this.deviceIdFacingback = data[findFacingback].deviceId;
+    action.playDevice(data[findFacingback].deviceId);
   }
 }
