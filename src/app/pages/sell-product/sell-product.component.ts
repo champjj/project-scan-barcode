@@ -31,8 +31,10 @@ export class SellProductComponent implements OnInit {
     },
   ];
 
-  testDeviceId: any;
-  testShowIndex: any;
+  showData: any;
+
+  deviceIdFacingback: any;
+  indexCameraFacingback: any;
 
   value = '';
   // https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
@@ -62,14 +64,14 @@ export class SellProductComponent implements OnInit {
     action[fn]()
       .pipe(
         tap(() => {
-          const findFacingBack = this.testDevices.findIndex(
-            (data) => data.label == 'camera2 0, facing back'
+          const findFacingBack = action.devices.findIndex(
+            (data: any) => data.label == 'camera2 0, facing back'
           );
-          console.log(findFacingBack);
-          this.testShowIndex = findFacingBack;
+          this.showData = action.devices;
+          this.indexCameraFacingback = findFacingBack;
           // action.devices.find(data);
-          this.testDeviceId = this.testDevices[findFacingBack].deviceId;
-          action.playDevice(this.testDevices[findFacingBack].deviceId);
+          this.deviceIdFacingback = action.devices[findFacingBack].deviceId;
+          action.playDevice(action.devices[findFacingBack].deviceId);
         })
       )
       .subscribe(console.log, alert);

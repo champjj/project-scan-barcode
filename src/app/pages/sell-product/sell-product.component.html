@@ -10,11 +10,11 @@
           (ngModelChange)="action.playDevice($event)"
           class="form-select form-select-sm"
         >
-          <option [value]="testDeviceId" selected>Select device</option>
+          <option [value]="deviceIdFacingback" selected>Select device</option>
           <option
             *ngFor="let c of action.devices.value; let i = index"
             [ngValue]="c.deviceId"
-            [selected]="i == testShowIndex"
+            [selected]="i == indexCameraFacingback"
           >
             {{ c.label }}
           </option>
@@ -30,7 +30,8 @@
     ></ngx-scanner-qrcode>
 
     <!-- data  -->
-    <p class="data">{{ action.devices | async | json }}</p>
+    <!-- <p class="data">{{ action.devices | async | json }}</p> -->
+    <p class="data">{{ showData | async | json }}</p>
 
     <!-- loading -->
     <p *ngIf="action.isLoading">⌛ Loading...</p>
@@ -59,7 +60,7 @@
 
   <ng-container>
     <p>value : {{ value }}</p>
-    <p>testShowIndex : {{ testShowIndex }}</p>
+    <p>indexCameraFacingback : {{ indexCameraFacingback }}</p>
     <br />
     <!-- <span>action.data.value: {{ action.data.value | json }}</span>
     <br />
