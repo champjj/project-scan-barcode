@@ -3,11 +3,12 @@
     <h1>ngx-scanner-qrcode</h1>
 
     <!-- devices -->
+
     <div>
       <select
         [ngModel]="null"
         (ngModelChange)="action.playDevice($event)"
-        class="selectbox-select-device"
+        class="selectbox-select-device hidden"
       >
         <option [value]="deviceIdFacingback" selected>Select device</option>
         <option
@@ -25,9 +26,10 @@
     <!-- ngx-scanner-qrcode -->
     <ngx-scanner-qrcode
       #action="scanner"
+      id="scannerCamera"
       [config]="config"
       (event)="onEvent($event)"
-      class="scanner-barcode"
+      class="scanner-barcode hidden-scanner"
     ></ngx-scanner-qrcode>
 
     <!-- loading -->

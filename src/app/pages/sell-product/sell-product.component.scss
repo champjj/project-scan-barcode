@@ -9,6 +9,7 @@
       margin: 1rem 0;
       .origin-video {
         border-radius: 14px;
+        background-color: transparent;
       }
     }
     .btn-open-scanner {
@@ -17,5 +18,11 @@
       border-radius: 10px;
       font-weight: 600;
     }
+  }
+  .hidden {
+    display: none;
+  }
+  .hidden-scanner {
+    height: 0px;
   }
 }
