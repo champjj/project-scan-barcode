@@ -43,6 +43,8 @@ export class SellProductComponent implements OnInit {
     }
   }
   handle(action: any, fn: string): void {
+    document.getElementById('selectDevices')?.classList.remove('hidden');
+    document.getElementById('cameraScanner')?.classList.remove('hidden');
     action[fn]()
       .pipe(
         tap(() => {
@@ -66,7 +68,5 @@ export class SellProductComponent implements OnInit {
     action.playDevice(
       findFacingback !== -1 ? data[findFacingback].deviceId : 0
     );
-    document.getElementById('selectDevices')?.classList.remove('hidden');
-    document.getElementById('cameraScanner')?.classList.remove('hidden');
   }
 }
