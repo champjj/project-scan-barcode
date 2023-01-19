@@ -3,11 +3,12 @@
     <h1>ngx-scanner-qrcode</h1>
 
     <!-- devices -->
-    <div [class.hidden]="!action.isStart" [class.show]="action.isStart">
+    <div>
       <select
+        id="selectDevices"
         [ngModel]="null"
         (ngModelChange)="action.playDevice($event)"
-        class="selectbox-select-device"
+        class="selectbox-select-device hidden"
       >
         <option [value]="deviceIdFacingback" selected>Select device</option>
         <option
@@ -25,11 +26,10 @@
     <!-- ngx-scanner-qrcode -->
     <ngx-scanner-qrcode
       #action="scanner"
+      id="cameraScanner"
       [config]="config"
       (event)="onEvent($event)"
-      class="scanner-barcode"
-      [class.hidden]="!action.isStart"
-      [class.show]="action.isStart"
+      class="scanner-barcode hidden"
     ></ngx-scanner-qrcode>
 
     <!-- loading -->
@@ -43,6 +43,7 @@
         [hidden]="action.isStart"
         [disabled]="action.isLoading"
         class="btn-open-scanner"
+        (click)="handle(action, 'start')"
       >
         <label>OPEN SCANNER</label>
       </button>

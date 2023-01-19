@@ -1,16 +1,5 @@
-import {
-  Component,
-  HostListener,
-  OnInit,
-  ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
-import {
-  ScannerQRCodeConfig,
-  ScannerQRCodeSelectedFiles,
-  ScannerQRCodeResult,
-  NgxScannerQrcodeComponent,
-} from 'ngx-scanner-qrcode';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ScannerQRCodeConfig, ScannerQRCodeResult } from 'ngx-scanner-qrcode';
 import { tap } from 'rxjs';
 import { IScannerDevice } from 'src/app/@core/models/scanner-models';
 @Component({
@@ -53,7 +42,6 @@ export class SellProductComponent implements OnInit {
       console.log(e);
     }
   }
-
   handle(action: any, fn: string): void {
     action[fn]()
       .pipe(
@@ -61,10 +49,12 @@ export class SellProductComponent implements OnInit {
           this.showData = action.devices._value;
         })
       )
-      .subscribe(() => {
-        console.log, alert;
-        this.setCameraFacingback(action, this.showData);
-      });
+      .subscribe(
+        () => console.log,
+        alert,
+        () => {},
+        () => this.setCameraFacingback(action, this.showData)
+      );
   }
 
   setCameraFacingback(action: any, data: IScannerDevice[]): void {
@@ -76,5 +66,7 @@ export class SellProductComponent implements OnInit {
     action.playDevice(
       findFacingback !== -1 ? data[findFacingback].deviceId : 0
     );
+    document.getElementById('selectDevices')?.classList.remove('hidden');
+    document.getElementById('cameraScanner')?.classList.remove('hidden');
   }
 }
