@@ -67,6 +67,7 @@ export class SellProductComponent {
           console.log(findFacingBack);
           this.testShowIndex = findFacingBack;
           // action.devices.find(data);
+          action.playDevice(findFacingBack);
         })
       )
       .subscribe(console.log, alert);
