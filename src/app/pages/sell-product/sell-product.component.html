@@ -5,10 +5,9 @@
     <!-- devices -->
     <div>
       <select
-        id="selectDevices"
         [ngModel]="null"
         (ngModelChange)="action.playDevice($event)"
-        class="selectbox-select-device hidden"
+        class="selectbox-select-device"
       >
         <option [value]="deviceIdFacingback" selected>Select device</option>
         <option
@@ -26,10 +25,9 @@
     <!-- ngx-scanner-qrcode -->
     <ngx-scanner-qrcode
       #action="scanner"
-      id="cameraScanner"
       [config]="config"
       (event)="onEvent($event)"
-      class="scanner-barcode hidden"
+      class="scanner-barcode"
     ></ngx-scanner-qrcode>
 
     <!-- loading -->
@@ -54,7 +52,7 @@
     <p>showData : {{ showData | json }}</p>
     <p>showScannerResult : {{ showScannerResult | json }}</p>
     <p>value : {{ value }}</p>
-    <p>indexCameraFacingback : {{ indexCameraFacingback }}</p>
+    <p>indexCameraFacingback2 : {{ indexCameraFacingback }}</p>
     <br />
   </div>
 </div>
