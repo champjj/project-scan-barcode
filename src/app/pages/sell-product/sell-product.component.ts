@@ -31,7 +31,7 @@ export class SellProductComponent {
 
   onEvent(e: ScannerQRCodeResult[]): void {
     this.value = e[0].value;
-    alert('data' + e);
+    alert('data' + e[0].value);
     console.log(e);
   }
 

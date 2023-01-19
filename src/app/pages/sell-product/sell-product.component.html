@@ -30,7 +30,7 @@
     ></ngx-scanner-qrcode>
 
     <!-- data  -->
-    <!-- <p class="data">{{ (action.data | async | json) }}</p> -->
+    <p class="data">{{ action.devices | async | json }}</p>
 
     <!-- loading -->
     <p *ngIf="action.isLoading">⌛ Loading...</p>
