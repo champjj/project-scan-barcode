@@ -64,14 +64,14 @@ export class SellProductComponent implements OnInit {
     action[fn]()
       .pipe(
         tap(() => {
-          const findFacingBack = action['devices'].findIndex(
-            (data: any) => data.label == 'camera2 0, facing back'
-          );
+          // const findFacingBack = action['devices'].findIndex(
+          //   (data: any) => data.label == 'camera2 0, facing back'
+          // );
           this.showData = action.devices;
-          this.indexCameraFacingback = findFacingBack;
+          // this.indexCameraFacingback = findFacingBack;
           // action.devices.find(data);
-          this.deviceIdFacingback = action.devices[findFacingBack].deviceId;
-          action.playDevice(action.devices[findFacingBack].deviceId);
+          // this.deviceIdFacingback = action.devices[findFacingBack].deviceId;
+          // action.playDevice(action.devices[findFacingBack].deviceId);
         })
       )
       .subscribe(console.log, alert);
