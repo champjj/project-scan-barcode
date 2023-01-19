@@ -59,7 +59,7 @@ export class SellProductComponent implements OnInit {
           () => {},
           () => this.setCameraFacingback(action, this.showData)
         );
-    }, 500);
+    }, 1000);
   }
 
   setCameraFacingback(action: any, data: IScannerDevice[]): void {
