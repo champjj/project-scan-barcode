@@ -40,9 +40,11 @@ export class SellProductComponent implements OnInit {
 
   onEvent(e: ScannerQRCodeResult[]): void {
     this.showScannerResult = e;
-    this.value = e[0].value;
-    alert('data' + e[0].value);
-    console.log(e);
+    if (e[0].typeName !== 'ZBAR_QRCODE') {
+      this.value = e[0].value;
+      alert('data' + e[0].value);
+      console.log(e);
+    }
   }
 
   handle(action: any, fn: string): void {
