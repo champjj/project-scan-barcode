@@ -45,18 +45,21 @@ export class SellProductComponent implements OnInit {
   handle(action: any, fn: string): void {
     document.getElementById('selectDevices')?.classList.remove('hidden');
     document.getElementById('cameraScanner')?.classList.remove('hidden');
-    action[fn]()
-      .pipe(
-        tap(() => {
-          this.showData = action.devices._value;
-        })
-      )
-      .subscribe(
-        () => console.log,
-        alert,
-        () => {},
-        () => this.setCameraFacingback(action, this.showData)
-      );
+
+    setTimeout(() => {
+      action[fn]()
+        .pipe(
+          tap(() => {
+            this.showData = action.devices._value;
+          })
+        )
+        .subscribe(
+          () => console.log,
+          alert,
+          () => {},
+          () => this.setCameraFacingback(action, this.showData)
+        );
+    }, 500);
   }
 
   setCameraFacingback(action: any, data: IScannerDevice[]): void {
