@@ -3,23 +3,23 @@
     <h1>ngx-scanner-qrcode</h1>
 
     <!-- devices -->
-    <div class="row">
-      <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 my-1">
-        <select
-          [ngModel]="null"
-          (ngModelChange)="action.playDevice($event)"
-          class="form-select form-select-sm"
+    <div [class.hidden]="!action.isStart">
+      <select
+        [ngModel]="null"
+        (ngModelChange)="action.playDevice($event)"
+        class="selectbox-select-device"
+      >
+        <option [value]="deviceIdFacingback" selected>Select device</option>
+        <option
+          *ngFor="let c of action.devices.value; let i = index"
+          [ngValue]="c.deviceId"
+          [selected]="
+            indexCameraFacingback !== -1 ? i == indexCameraFacingback : 0
+          "
         >
-          <option [value]="deviceIdFacingback" selected>Select device</option>
-          <option
-            *ngFor="let c of action.devices.value; let i = index"
-            [ngValue]="c.deviceId"
-            [selected]="i == indexCameraFacingback"
-          >
-            {{ c.label }}
-          </option>
-        </select>
-      </div>
+          {{ c.label }}
+        </option>
+      </select>
     </div>
 
     <!-- ngx-scanner-qrcode -->
@@ -27,44 +27,32 @@
       #action="scanner"
       [config]="config"
       (event)="onEvent($event)"
+      class="scanner-barcode"
+      [class.hidden]="!action.isStart"
     ></ngx-scanner-qrcode>
-
-    <!-- data  -->
-    <!-- <p class="data">{{ action.devices | async | json }}</p> -->
 
     <!-- loading -->
     <p *ngIf="action.isLoading">⌛ Loading...</p>
 
     <!-- start/stop -->
-    <button
-      class="btn"
-      [class.btn-info]="!action.isStart"
-      [hidden]="action.isStart"
-      [disabled]="action.isLoading"
-    >
-      <img
-        *ngIf="!action.isStart"
-        (click)="handle(action, 'start')"
-        src="https://img.icons8.com/ios/50/000000/no-camera--v2.png"
-        width="30px"
-      />
-      <!-- <img
-        *ngIf="action.isStart"
-        (click)="handle(action, 'stop')"
-        src="https://img.icons8.com/ios/50/000000/no-camera--v1.png"
-        width="30px"
-      /> -->
-    </button>
+    <div>
+      <button
+        mat-raised-button
+        [class.btn-info]="!action.isStart"
+        [hidden]="action.isStart"
+        [disabled]="action.isLoading"
+        class="btn-open-scanner"
+      >
+        <label>OPEN SCANNER</label>
+      </button>
+    </div>
   </div>
 
-  <ng-container>
+  <div style="width: 100%; word-break: break-all">
     <p>showData : {{ showData | json }}</p>
     <p>showScannerResult : {{ showScannerResult | json }}</p>
     <p>value : {{ value }}</p>
     <p>indexCameraFacingback : {{ indexCameraFacingback }}</p>
     <br />
-    <!-- <span>action.data.value: {{ action.data.value | json }}</span>
-    <br />
-    <span>action.data: {{ action.data | async | json }}</span> -->
-  </ng-container>
+  </div>
 </div>

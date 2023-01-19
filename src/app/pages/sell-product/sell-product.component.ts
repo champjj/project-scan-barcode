@@ -1,4 +1,10 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import {
   ScannerQRCodeConfig,
   ScannerQRCodeSelectedFiles,
@@ -11,6 +17,7 @@ import { IScannerDevice } from 'src/app/@core/models/scanner-models';
   selector: 'app-sell-product',
   templateUrl: './sell-product.component.html',
   styleUrls: ['./sell-product.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class SellProductComponent implements OnInit {
   showData: any;

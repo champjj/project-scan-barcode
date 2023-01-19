@@ -10,6 +10,7 @@ import { MenuComponent } from './menu/menu.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 
 import { SellProductComponent } from './sell-product/sell-product.component';
 import { AddProductComponent } from './add-product/add-product.component';
@@ -42,6 +43,7 @@ import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
+    MatSelectModule,
   ],
   providers: [],
 })
