@@ -64,7 +64,7 @@ export class SellProductComponent implements OnInit {
     action[fn]()
       .pipe(
         tap(() => {
-          const findFacingBack = action.devices.findIndex(
+          const findFacingBack = action['devices'].findIndex(
             (data: any) => data.label == 'camera2 0, facing back'
           );
           this.showData = action.devices;
