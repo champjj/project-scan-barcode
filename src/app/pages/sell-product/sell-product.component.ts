@@ -30,6 +30,7 @@ export class SellProductComponent {
     },
   ];
 
+  testDeviceId: any;
   testShowIndex: any;
 
   value = '';
@@ -67,9 +68,12 @@ export class SellProductComponent {
           console.log(findFacingBack);
           this.testShowIndex = findFacingBack;
           // action.devices.find(data);
-          action.playDevice(findFacingBack);
+          this.testDeviceId = this.testDevices[findFacingBack].deviceId;
+          action.playDevice(this.testDevices[findFacingBack].deviceId);
         })
       )
       .subscribe(console.log, alert);
   }
+
+  setCameraFacingback() {}
 }

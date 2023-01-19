@@ -10,7 +10,7 @@
           (ngModelChange)="action.playDevice($event)"
           class="form-select form-select-sm"
         >
-          <option [value]="testShowIndex" selected>Select device</option>
+          <option [value]="testDeviceId" selected>Select device</option>
           <option
             *ngFor="let c of action.devices.value; let i = index"
             [ngValue]="c.deviceId"
