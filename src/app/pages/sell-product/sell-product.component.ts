@@ -3,6 +3,7 @@ import {
   ScannerQRCodeConfig,
   ScannerQRCodeSelectedFiles,
   ScannerQRCodeResult,
+  NgxScannerQrcodeComponent,
 } from 'ngx-scanner-qrcode';
 import { tap } from 'rxjs';
 @Component({
@@ -10,7 +11,7 @@ import { tap } from 'rxjs';
   templateUrl: './sell-product.component.html',
   styleUrls: ['./sell-product.component.scss'],
 })
-export class SellProductComponent {
+export class SellProductComponent implements OnInit {
   testDevices = [
     {
       deviceId:
@@ -49,8 +50,7 @@ export class SellProductComponent {
   };
 
   constructor() {}
-
-  ngOnInit() {}
+  ngOnInit(): void {}
 
   onEvent(e: ScannerQRCodeResult[]): void {
     this.value = e[0].value;
@@ -74,6 +74,4 @@ export class SellProductComponent {
       )
       .subscribe(console.log, alert);
   }
-
-  setCameraFacingback() {}
 }
