@@ -3,7 +3,7 @@
     <h1>ngx-scanner-qrcode</h1>
 
     <!-- devices -->
-    <div [class.hidden]="!action.isStart">
+    <div [class.hidden]="!action.isStart" [class.show]="action.isStart">
       <select
         [ngModel]="null"
         (ngModelChange)="action.playDevice($event)"
@@ -29,6 +29,7 @@
       (event)="onEvent($event)"
       class="scanner-barcode"
       [class.hidden]="!action.isStart"
+      [class.show]="action.isStart"
     ></ngx-scanner-qrcode>
 
     <!-- loading -->
