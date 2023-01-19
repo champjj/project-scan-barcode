@@ -18,7 +18,7 @@ export class SellProductComponent implements OnInit {
   deviceIdFacingback: any;
   indexCameraFacingback: any;
 
-  showScannerResult:any
+  showScannerResult: any;
 
   value = '';
   // https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
@@ -39,6 +39,7 @@ export class SellProductComponent implements OnInit {
   ngOnInit(): void {}
 
   onEvent(e: ScannerQRCodeResult[]): void {
+    this.showScannerResult = e;
     this.value = e[0].value;
     alert('data' + e[0].value);
     console.log(e);
@@ -47,9 +48,8 @@ export class SellProductComponent implements OnInit {
   handle(action: any, fn: string): void {
     action[fn]()
       .pipe(
-        tap((value) => {
+        tap(() => {
           this.showData = action.devices._value;
-          this.showScannerResult = value
         })
       )
       .subscribe(() => {
@@ -64,6 +64,8 @@ export class SellProductComponent implements OnInit {
     );
     this.indexCameraFacingback = findFacingback;
     this.deviceIdFacingback = data[findFacingback].deviceId;
-    action.playDevice(data[findFacingback].deviceId);
+    action.playDevice(
+      findFacingback !== -1 ? data[findFacingback].deviceId : 0
+    );
   }
 }
