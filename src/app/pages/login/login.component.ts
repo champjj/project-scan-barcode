@@ -18,6 +18,8 @@ import { ApiServiceService } from 'src/app/@core/services/api-service.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  getUserDataLogin = localStorage.getItem('UData');
+
   loginForm: FormGroup = this.fb.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
@@ -30,7 +32,9 @@ export class LoginComponent implements OnInit {
     public dialog: MatDialog
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.bypassLogin();
+  }
 
   disabledButton() {
     return this.loginForm.invalid;
@@ -38,6 +42,12 @@ export class LoginComponent implements OnInit {
 
   getLoginFormByName(name: string) {
     return this.loginForm.get(name) as FormControl;
+  }
+
+  bypassLogin() {
+    if (this.getUserDataLogin) {
+      this.route.navigate(['menu']);
+    }
   }
 
   onLogin() {
@@ -51,6 +61,7 @@ export class LoginComponent implements OnInit {
           if (userData[0]) {
             if (userData[0].password == password) {
               this.route.navigate(['menu']);
+              localStorage.setItem('UData', JSON.stringify(userData[0]));
             } else {
               this.openDialog();
             }

@@ -2,20 +2,40 @@
   <div class="cover-info">
     <img src="../../../assets/images/default_user.png" alt="" />
     <c-input
-      [id]="'username'"
-      [inputType]="'text'"
-      [placeholder]="'Username'"
-      [control]="getSettingInfoByName('username')"
-    ></c-input>
-    <c-input
       [id]="'shopName'"
       [inputType]="'text'"
       [placeholder]="'shopName'"
-      [control]="getSettingInfoByName('shopName')"
+      [control]="getSettingInfoByName('shopname')"
+    ></c-input>
+    <c-input
+      [id]="'mobileNumber'"
+      [inputType]="'text'"
+      [placeholder]="'mobileNumber'"
+      [control]="getSettingInfoByName('mobileNumber')"
+    ></c-input>
+    <c-input
+      [id]="'email'"
+      [inputType]="'text'"
+      [placeholder]="'email'"
+      [control]="getSettingInfoByName('email')"
+    ></c-input>
+    <c-input
+      [id]="'discountMember'"
+      [inputType]="'number'"
+      [placeholder]="'discountMember'"
+      [control]="getSettingInfoByName('discountMember')"
+    ></c-input>
+    <c-input
+      [id]="'imageShop'"
+      [inputType]="'text'"
+      [placeholder]="'imageShop'"
+      [control]="getSettingInfoByName('imageShop')"
     ></c-input>
     <div class="cover-btn">
       <button (click)="onSave()" mat-raised-button>Save</button>
-      <button class="btn-back" (click)="onBack()" mat-raised-button>Back</button>
+      <button class="btn-back" (click)="onBack()" mat-raised-button>
+        Back
+      </button>
     </div>
   </div>
 </div>

@@ -29,4 +29,16 @@ export class ApiServiceService {
       .collection('users', (ref) => ref.where('username', '==', username))
       .valueChanges();
   }
+
+  updateUserData(data: IUser) {
+    return this.firestore.collection('users').doc(data.username).update({
+      username: data.username,
+      password: data.password,
+      shopname: data.shopname,
+      mobileNumber: data.mobileNumber,
+      email: data.email,
+      discountMember: data.discountMember,
+      imageShop: data.imageShop,
+    });
+  }
 }

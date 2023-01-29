@@ -3,10 +3,10 @@
     <img src="../../../assets/images/default_user.png" alt="" />
     <ul>
       <li>
-        <label>shop name</label>
+        <label>{{ getUserData.shopname }}</label>
       </li>
       <li>
-        <label style="color: darkgray">username</label>
+        <label style="color: darkgray">{{ getUserData.username }}</label>
       </li>
     </ul>
     <div class="cover-setting" (click)="onChangePage('setting')">

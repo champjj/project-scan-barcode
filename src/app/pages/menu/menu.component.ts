@@ -29,13 +29,20 @@ export class MenuComponent {
       image: '../../../assets/images/product.png',
       link: 'stock',
     },
+    {
+      menuName: 'Log out',
+      // image: '../../../assets/images/product.png',
+      image: '',
+      link: 'login',
+    },
   ];
+
+  getUserData = JSON.parse(localStorage.getItem('UData') as string);
 
   constructor(private route: Router) {}
 
-  
-
   onChangePage(link: string) {
+    if (link == 'login') localStorage.removeItem('UData');
     this.route.navigate([link]);
   }
 }
