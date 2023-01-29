@@ -21,6 +21,10 @@ import {
 import { StockComponent } from './stock/stock.component';
 import { SettingComponent } from './setting/setting.component';
 import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
+import {
+  DialogRegister,
+  RegisterComponent,
+} from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +36,8 @@ import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
     StockComponent,
     SettingComponent,
     DialogEditProduct,
+    RegisterComponent,
+    DialogRegister,
   ],
   imports: [
     CommonModule,

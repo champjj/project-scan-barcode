@@ -1,0 +1,8 @@
+<div class="dialog-register" *ngIf="showDialog |async as dialog">
+  <label mat-dialog-title><b>Register</b></label>
+  <ng-container [ngSwitch]="dialog">
+    <div *ngSwitchCase="1"><p>Username is already used</p></div>
+    <div *ngSwitchCase="2"><p>Success</p></div>
+    <div *ngSwitchCase="3"><p>Register fail please try again</p></div>
+  </ng-container>
+</div>

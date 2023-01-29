@@ -6,7 +6,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { tap } from 'rxjs';
+import { IUser } from 'src/app/@core/models/users-models';
+import { ApiServiceService } from 'src/app/@core/services/api-service.service';
 
 @Component({
   selector: 'app-login',
@@ -19,20 +23,15 @@ export class LoginComponent implements OnInit {
     password: ['', Validators.required],
   });
 
-  constructor(private fb: FormBuilder, private firestore: AngularFirestore) {}
+  constructor(
+    private fb: FormBuilder,
+    private route: Router,
+    private apiService: ApiServiceService,
+    public dialog: MatDialog
+  ) {}
 
-  ngOnInit(): void {
-    this.getItem();
-  }
+  ngOnInit(): void {}
 
-  getItem() {
-    this.firestore
-      .collection('users')
-      .valueChanges()
-      .subscribe((data) => {
-        console.log(data);
-      });
-  }
   disabledButton() {
     return this.loginForm.invalid;
   }
@@ -40,4 +39,39 @@ export class LoginComponent implements OnInit {
   getLoginFormByName(name: string) {
     return this.loginForm.get(name) as FormControl;
   }
+
+  onLogin() {
+    const { username, password } = this.loginForm.value;
+
+    this.apiService
+      .queryUsername(username)
+      .pipe(
+        tap((userData: any) => {
+          console.log(userData[0]);
+          if (userData[0]) {
+            if (userData[0].password == password) {
+              this.route.navigate(['menu']);
+            } else {
+              this.openDialog();
+            }
+          }
+        })
+      )
+      .subscribe();
+  }
+
+  onRegister() {
+    this.route.navigate(['register']);
+  }
+
+  openDialog(): void {
+    this.dialog.open(DialogLogin, {});
+  }
 }
+
+@Component({
+  selector: 'dialog-login',
+  templateUrl: './dialog-login.html',
+  styleUrls: ['./login.component.scss'],
+})
+export class DialogLogin {}

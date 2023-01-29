@@ -1,0 +1,45 @@
+<div class="register-page">
+  <div class="cover-input">
+    <label class="text-login">Register</label>
+    <c-input
+      [id]="'username'"
+      [inputType]="'text'"
+      [placeholder]="'Username'"
+      [control]="getRegisterFormByName('username')"
+    ></c-input>
+    <c-input
+      [id]="'password'"
+      [inputType]="'password'"
+      [placeholder]="'Password'"
+      [control]="getRegisterFormByName('password')"
+    ></c-input>
+    <c-input
+      [id]="'shopname'"
+      [inputType]="'shopname'"
+      [placeholder]="'shopname'"
+      [control]="getRegisterFormByName('shopname')"
+    ></c-input>
+    <c-input
+      [id]="'mobileNumber'"
+      [inputType]="'number'"
+      [placeholder]="'mobileNumber'"
+      [maxlength]="10"
+      [minlength]="10"
+      [control]="getRegisterFormByName('mobileNumber')"
+    ></c-input>
+    <c-input
+      [id]="'email'"
+      [inputType]="'email'"
+      [placeholder]="'E-mail'"
+      [control]="getRegisterFormByName('email')"
+    ></c-input>
+    <button
+      (click)="onRegister()"
+      [disabled]="disabledButton()"
+      mat-raised-button
+    >
+      Register
+    </button>
+    <button (click)="onBack()" mat-raised-button>Back</button>
+  </div>
+</div>

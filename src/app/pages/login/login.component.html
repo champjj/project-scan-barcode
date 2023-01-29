@@ -14,7 +14,9 @@
       [control]="getLoginFormByName('password')"
     ></c-input>
 
-    <button [disabled]="disabledButton()" mat-raised-button>Sign in</button>
-    <a style="text-align: center; text-decoration: underline">Register</a>
+    <button (click)="onLogin()" [disabled]="disabledButton()" mat-raised-button>
+      Sign in
+    </button>
+    <a (click)="onRegister()" class="btn-text-register">Register</a>
   </div>
 </div>
