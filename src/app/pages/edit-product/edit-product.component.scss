@@ -8,6 +8,7 @@
     word-break: break-word;
   }
   .cover-list-product {
+    margin: 0 0 5rem 0;
     .cover-card-product {
       margin: 0 2rem;
       .card-product {
@@ -17,8 +18,18 @@
       }
     }
   }
+  .cover-btn-footer {
+    position: fixed;
+    bottom: 0px;
+    padding: 10px 1rem;
+    width: 100%;
+    background-color: white;
+    button {
+      width: 92%;
+      height: 40px;
+    }
+  }
 }
-
 .dialog-edit-product {
   .cover-edit-field {
     .dialog-btn-save {

@@ -29,4 +29,7 @@ export class EditProductComponent implements OnInit {
   onSelectProduct(item: IProduct): void {
     this.route.navigate(['edit-select', item.productCode]);
   }
+  onBack() {
+    this.route.navigate(['menu']);
+  }
 }
