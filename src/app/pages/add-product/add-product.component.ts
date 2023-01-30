@@ -40,9 +40,7 @@ export class AddProductComponent implements OnInit {
     return this.addProduct.invalid || this.disbledBtnWhenLoad;
   }
 
-  ngOnInit(): void {
-    this.trackerProductCode();
-  }
+  ngOnInit(): void {}
 
   getAddProductFormByName(name: string) {
     return this.addProduct.get(name) as FormControl;
@@ -59,7 +57,10 @@ export class AddProductComponent implements OnInit {
   }
 
   onOpenScanner() {
-    this.dialog.open(DialogAddProduct, {});
+    this.dialog
+      .open(DialogAddProduct, {})
+      .afterClosed()
+      .subscribe(() => this.trackerProductCode());
   }
   onOpenStatus() {
     this.dialog
@@ -138,6 +139,7 @@ export class DialogAddProduct {
     this.showScannerResult = e;
     if (e[0].typeName !== 'ZBAR_QRCODE') {
       this.productCode = e[0].value;
+      this.onCloseDialog();
       alert('data' + e[0].value);
       console.log(e);
     }
