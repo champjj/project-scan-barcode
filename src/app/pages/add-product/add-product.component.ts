@@ -153,10 +153,11 @@ export class DialogAddProduct {
         })
       )
       .subscribe(
-        () => console.log,
-        alert,
+        () => {
+          this.setCameraFacingback(action, this.showData);
+        },
         () => {},
-        () => this.setCameraFacingback(action, this.showData)
+        () => {}
       );
   }
 
