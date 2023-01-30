@@ -1,9 +1,5 @@
-<div class="sell-product">
-  <div class="container">
-    <h1>Sell Product</h1>
-
+<div class="dialog-edit-scanner">
     <!-- devices -->
-
     <div>
       <select
         [ngModel]="null"
@@ -15,14 +11,14 @@
           *ngFor="let c of action.devices.value; let i = index"
           [ngValue]="c.deviceId"
           [selected]="
-            indexCameraFacingback !== -1 ? i == indexCameraFacingback : 0
-          "
+                    indexCameraFacingback !== -1 ? i == indexCameraFacingback : 0
+                  "
         >
           {{ c.label }}
         </option>
       </select>
     </div>
-
+  
     <!-- ngx-scanner-qrcode -->
     <ngx-scanner-qrcode
       #action="scanner"
@@ -31,10 +27,10 @@
       (event)="onEvent($event)"
       class="scanner-barcode hidden-scanner"
     ></ngx-scanner-qrcode>
-
+  
     <!-- loading -->
     <p *ngIf="action.isLoading">⌛ Loading...</p>
-
+  
     <!-- start/stop -->
     <div hidden>
       <button
@@ -50,12 +46,4 @@
       </button>
     </div>
   </div>
-
-  <!-- <div style="width: 100%; word-break: break-all">
-    <p>showData : {{ showData | json }}</p>
-    <p>showScannerResult : {{ showScannerResult | json }}</p>
-    <p>value : {{ value }}</p>
-    <p>indexCameraFacingback2 : {{ indexCameraFacingback }}</p>
-    <br />
-  </div> -->
-</div>
+  

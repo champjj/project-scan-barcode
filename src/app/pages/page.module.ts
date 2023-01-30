@@ -17,10 +17,7 @@ import {
   AddProductComponent,
   DialogAddProduct,
 } from './add-product/add-product.component';
-import {
-  DialogEditProduct,
-  EditProductComponent,
-} from './edit-product/edit-product.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 import { StockComponent } from './stock/stock.component';
 import { SettingComponent } from './setting/setting.component';
 import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
@@ -28,6 +25,10 @@ import {
   DialogRegister,
   RegisterComponent,
 } from './register/register.component';
+import {
+  DialogEditScanner,
+  EditSelectProductComponent,
+} from './edit-product/edit-select-product/edit-select-product.component';
 
 @NgModule({
   declarations: [
@@ -39,11 +40,11 @@ import {
     StockComponent,
     SettingComponent,
     RegisterComponent,
+    EditSelectProductComponent,
     ///// dialog
-    DialogEditProduct,
     DialogRegister,
     DialogAddProduct,
-    
+    DialogEditScanner,
     //////////
   ],
   imports: [

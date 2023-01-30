@@ -7,6 +7,7 @@ import { IUser } from '../models/users-models';
   providedIn: 'root',
 })
 export class ApiServiceService {
+  getUser = JSON.parse(localStorage.getItem('UData') as string);
   constructor(private firestore: AngularFirestore) {}
 
   ///// api user /////
@@ -47,13 +48,47 @@ export class ApiServiceService {
 
   ///// api product /////
 
-  createProduct(username: string, data: IProduct) {
+  getProducts() {
     return this.firestore
       .collection('users')
-      .doc(username)
+      .doc(this.getUser.username)
       .collection('products')
-      .doc(data.productCode)
+      .valueChanges({ idField: 'id' });
+  }
+
+  queryProductByCode(code: string | null) {
+    return this.firestore
+      .collection('users')
+      .doc(this.getUser.username)
+      .collection('products', (ref) => ref.where('productCode', '==', code))
+      .valueChanges({
+        idField: 'id',
+      });
+  }
+
+  createProduct(id: string, data: IProduct) {
+    return this.firestore
+      .collection('users')
+      .doc(this.getUser.username)
+      .collection('products')
+      .doc()
       .set({
+        productName: data.productName,
+        productCode: data.productCode,
+        imageProduct: data.imageProduct,
+        qty: data.qty,
+        price: data.price,
+        category: data.category,
+      });
+  }
+
+  updateProduct(id: string, data: IProduct) {
+    return this.firestore
+      .collection('users')
+      .doc(this.getUser.username)
+      .collection('products')
+      .doc(id)
+      .update({
         productName: data.productName,
         productCode: data.productCode,
         imageProduct: data.imageProduct,

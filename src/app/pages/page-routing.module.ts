@@ -9,6 +9,7 @@ import { SellProductComponent } from './sell-product/sell-product.component';
 import { StockComponent } from './stock/stock.component';
 import { SettingComponent } from './setting/setting.component';
 import { RegisterComponent } from './register/register.component';
+import { EditSelectProductComponent } from './edit-product/edit-select-product/edit-select-product.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'menu', pathMatch: 'full' },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'menu', component: MenuComponent },
   { path: 'add-product', component: AddProductComponent },
   { path: 'edit-product', component: EditProductComponent },
+  { path: 'edit-select/:code', component: EditSelectProductComponent },
   { path: 'sell-product', component: SellProductComponent },
   { path: 'stock', component: StockComponent },
   { path: 'setting', component: SettingComponent },

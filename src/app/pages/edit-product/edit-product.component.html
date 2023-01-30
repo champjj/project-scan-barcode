@@ -1,13 +1,15 @@
 <div class="edit-product">
-  <div class="cover-list-product">
-    <div class="cover-card-product" *ngFor="let item of productList">
+  <div class="cover-list-product" *ngIf="productList$ | async as product">
+    <div class="cover-card-product" *ngFor="let item of product">
       <mat-card class="card-product">
         <ul>
           <li>Product Name : {{ item.productName }}</li>
           <li>Code : {{ item.productCode }}</li>
           <li>Price : {{ item.price }}</li>
+          <li>qty : {{ item.qty }}</li>
+          <li>Category : {{ item.category }}</li>
         </ul>
-        <button (click)="openDialog(item)" mat-raised-button>Edit</button>
+        <button (click)="onSelectProduct(item)" mat-raised-button>Edit</button>
       </mat-card>
     </div>
   </div>
