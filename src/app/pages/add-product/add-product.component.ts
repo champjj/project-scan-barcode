@@ -26,6 +26,8 @@ export class AddProductComponent implements OnInit {
 
   getUserData = JSON.parse(localStorage.getItem('UData') as string);
 
+  disbledBtnWhenLoad = false;
+
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
@@ -35,7 +37,7 @@ export class AddProductComponent implements OnInit {
   ) {}
 
   disabledButton() {
-    return this.addProduct.invalid;
+    return this.addProduct.invalid || this.disbledBtnWhenLoad;
   }
 
   ngOnInit(): void {
@@ -67,6 +69,7 @@ export class AddProductComponent implements OnInit {
   }
 
   onSave() {
+    this.disbledBtnWhenLoad = true;
     const dataProduct: IProduct = {
       productName: this.getAddProductFormByName('productName').value,
       productCode: this.getAddProductFormByName('productCode').value,
@@ -78,7 +81,8 @@ export class AddProductComponent implements OnInit {
 
     this.apiService
       .createProduct(this.getUserData.username, dataProduct)
-      .then(() => this.onOpenStatus());
+      .then(() => this.onOpenStatus())
+      .finally(() => (this.disbledBtnWhenLoad = false));
   }
 
   onBack() {
