@@ -28,7 +28,6 @@ export class AddProductComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private location: Location,
     public dialog: MatDialog,
     private serviceDataAddProduct: ServiceDataAddProductService,
     private route: Router,
@@ -61,7 +60,10 @@ export class AddProductComponent implements OnInit {
     this.dialog.open(DialogAddProduct, {});
   }
   onOpenStatus() {
-    this.dialog.open(DialogAddProductStatus, {});
+    this.dialog
+      .open(DialogAddProductStatus, {})
+      .afterClosed()
+      .subscribe(() => location.reload());
   }
 
   onSave() {
@@ -177,4 +179,6 @@ export class DialogAddProduct {
   templateUrl: './dialog-add-product-status.html',
   styleUrls: ['./add-product.component.scss'],
 })
-export class DialogAddProductStatus {}
+export class DialogAddProductStatus {
+  constructor(public dialogRef: MatDialogRef<DialogAddProductStatus>) {}
+}
