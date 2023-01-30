@@ -32,7 +32,7 @@
   <p *ngIf="action.isLoading">⌛ Loading...</p>
 
   <!-- start/stop -->
-  <div hidden>
+  <div>
     <button
       id="btnOpenScanner"
       mat-raised-button
@@ -41,7 +41,6 @@
       [disabled]="action.isLoading"
       class="btn-open-scanner"
       (click)="handle(action, 'start')"
-      hidden
     >
       <label>OPEN SCANNER</label>
     </button>
