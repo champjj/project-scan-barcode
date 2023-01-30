@@ -63,10 +63,11 @@ export class SellProductComponent implements OnInit {
         })
       )
       .subscribe(
-        () => console.log,
-        alert,
+        () => {
+          this.setCameraFacingback(action, this.showData);
+        },
         () => {},
-        () => this.setCameraFacingback(action, this.showData)
+        () => {}
       );
   }
 
