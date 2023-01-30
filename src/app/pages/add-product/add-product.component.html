@@ -6,12 +6,20 @@
       [placeholder]="'productName'"
       [control]="getAddProductFormByName('productName')"
     ></c-input>
-    <c-input
-      [id]="'productCode'"
-      [inputType]="'text'"
-      [placeholder]="'productCode'"
-      [control]="getAddProductFormByName('productCode')"
-    ></c-input>
+    <div class="cover-produce-code">
+      <c-input
+        class="input-width-space"
+        [id]="'productCode'"
+        [inputType]="'text'"
+        [placeholder]="'productCode'"
+        [control]="getAddProductFormByName('productCode')"
+      ></c-input>
+      <img
+        (click)="onOpenScanner()"
+        src="../../../assets/images/barcode_scanner.png"
+        alt=""
+      />
+    </div>
     <c-input
       [id]="'price'"
       [inputType]="'text'"
@@ -20,15 +28,37 @@
       [control]="getAddProductFormByName('price')"
     ></c-input>
     <c-input
+      [id]="'category'"
+      [inputType]="'text'"
+      [placeholder]="'category'"
+      [inputType]="'text'"
+      [control]="getAddProductFormByName('category')"
+    ></c-input>
+    <c-input
       [id]="'quantity'"
       [inputType]="'text'"
       [placeholder]="'quantity'"
       [inputType]="'number'"
       [control]="getAddProductFormByName('quantity')"
     ></c-input>
+    <c-input
+      [id]="'imageProduct'"
+      [inputType]="'text'"
+      [placeholder]="'imageProduct'"
+      [inputType]="'text'"
+      [control]="getAddProductFormByName('imageProduct')"
+    ></c-input>
     <div class="cover-btn">
-        <button (click)="onSave()" mat-raised-button>Save</button>
-        <button class="btn-back" (click)="onBack()" mat-raised-button>Back</button>
-      </div>
+      <button
+        (click)="onSave()"
+        [disabled]="disabledButton()"
+        mat-raised-button
+      >
+        Save
+      </button>
+      <button class="btn-back" (click)="onBack()" mat-raised-button>
+        Back
+      </button>
+    </div>
   </div>
 </div>

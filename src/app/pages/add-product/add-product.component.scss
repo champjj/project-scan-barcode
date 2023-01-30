@@ -1,6 +1,14 @@
 .add-product {
   .cover-info-product {
     margin: 4rem;
+    .cover-produce-code {
+      display: flex;
+      align-items: flex-end;
+      margin: 4px 0;
+      .input-width-space {
+        width: 100%;
+      }
+    }
   }
   .cover-btn {
     margin: 3rem 0 0 0;
@@ -8,4 +16,35 @@
     row-gap: 14px;
     flex-direction: column;
   }
+}
+.dialog-add-product {
+  .container {
+    margin: 1rem;
+    .selectbox-select-device {
+      border-radius: 10px;
+      padding: 4px;
+    }
+    .scanner-barcode {
+      margin: 1rem 0;
+      text-align: center;
+      .origin-video {
+        border-radius: 14px;
+        background-color: transparent;
+      }
+    }
+    .btn-open-scanner {
+      width: 100%;
+      padding: 10px 0;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+  }
+  .hidden {
+    display: none;
+  }
+  .hidden-scanner {
+    height: 0px;
+  }
+}
+.dialog-add-product-status {
 }

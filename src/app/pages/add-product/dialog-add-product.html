@@ -1,0 +1,49 @@
+<div class="dialog-add-product">
+  <!-- devices -->
+  <div>
+    <select
+      [ngModel]="null"
+      (ngModelChange)="action.playDevice($event)"
+      class="selectbox-select-device hidden"
+    >
+      <option [value]="deviceIdFacingback" selected>Select device</option>
+      <option
+        *ngFor="let c of action.devices.value; let i = index"
+        [ngValue]="c.deviceId"
+        [selected]="
+                  indexCameraFacingback !== -1 ? i == indexCameraFacingback : 0
+                "
+      >
+        {{ c.label }}
+      </option>
+    </select>
+  </div>
+
+  <!-- ngx-scanner-qrcode -->
+  <ngx-scanner-qrcode
+    #action="scanner"
+    id="scannerCamera"
+    [config]="config"
+    (event)="onEvent($event)"
+    class="scanner-barcode hidden-scanner"
+  ></ngx-scanner-qrcode>
+
+  <!-- loading -->
+  <p *ngIf="action.isLoading">⌛ Loading...</p>
+
+  <!-- start/stop -->
+  <div hidden>
+    <button
+      id="btnOpenScanner"
+      mat-raised-button
+      [class.btn-info]="!action.isStart"
+      [hidden]="action.isStart"
+      [disabled]="action.isLoading"
+      class="btn-open-scanner"
+      (click)="handle(action, 'start')"
+      hidden
+    >
+      <label>OPEN SCANNER</label>
+    </button>
+  </div>
+</div>

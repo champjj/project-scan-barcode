@@ -7,3 +7,9 @@ export interface IUser {
   discountMember: number;
   imageShop: string;
 }
+
+export interface IMember {
+  memberName: string;
+  mobileNumber: string;
+  lastorderTimestamp: string;
+}

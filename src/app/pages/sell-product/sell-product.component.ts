@@ -32,7 +32,16 @@ export class SellProductComponent implements OnInit {
   };
 
   constructor() {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.onClickInit();
+  }
+
+  onClickInit() {
+    const btnScanner: HTMLElement = document.getElementById(
+      'btnOpenScanner'
+    ) as HTMLElement;
+    btnScanner.click();
+  }
 
   onEvent(e: ScannerQRCodeResult[]): void {
     this.showScannerResult = e;

@@ -13,7 +13,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 
 import { SellProductComponent } from './sell-product/sell-product.component';
-import { AddProductComponent } from './add-product/add-product.component';
+import {
+  AddProductComponent,
+  DialogAddProduct,
+} from './add-product/add-product.component';
 import {
   DialogEditProduct,
   EditProductComponent,
@@ -35,9 +38,13 @@ import {
     EditProductComponent,
     StockComponent,
     SettingComponent,
-    DialogEditProduct,
     RegisterComponent,
+    ///// dialog
+    DialogEditProduct,
     DialogRegister,
+    DialogAddProduct,
+    
+    //////////
   ],
   imports: [
     CommonModule,
@@ -50,6 +57,7 @@ import {
     MatCardModule,
     MatDialogModule,
     MatSelectModule,
+    //////////
   ],
   providers: [],
 })
