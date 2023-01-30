@@ -52,6 +52,7 @@ export class SellProductComponent implements OnInit {
     }
   }
   handle(action: any, fn: string): void {
+    alert('function handle is activate');
     document
       .getElementById('scannerCamera')
       ?.classList.remove('hidden-scanner');
@@ -70,6 +71,7 @@ export class SellProductComponent implements OnInit {
   }
 
   setCameraFacingback(action: any, data: IScannerDevice[]): void {
+    alert('function setCameraFacingback is activate');
     const findFacingback = data.findIndex(
       (data: IScannerDevice) => data.label == 'camera2 0, facing back'
     );
