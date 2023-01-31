@@ -13,7 +13,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 
-import { SellProductComponent } from './sell-product/sell-product.component';
+import {
+  DialogSelling,
+  SellProductComponent,
+} from './sell-product/sell-product.component';
 import {
   AddProductComponent,
   DialogAddProduct,
@@ -46,6 +49,7 @@ import {
     DialogRegister,
     DialogAddProduct,
     DialogEditScanner,
+    DialogSelling,
     //////////
   ],
   imports: [

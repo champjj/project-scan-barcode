@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ScannerQRCodeConfig, ScannerQRCodeResult } from 'ngx-scanner-qrcode';
 import { tap } from 'rxjs';
@@ -49,7 +50,8 @@ export class SellProductComponent implements OnInit {
   constructor(
     private apiService: ApiServiceService,
     private route: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public dialog: MatDialog
   ) {}
   ngOnInit(): void {
     this.onClickInit();
@@ -79,6 +81,12 @@ export class SellProductComponent implements OnInit {
       .subscribe();
   }
 
+  onOpenDialog(codeCase: string) {
+    this.dialog.open(DialogSelling, {
+      data: codeCase,
+    });
+  }
+
   onEvent(e: ScannerQRCodeResult[]): void {
     this.showScannerResult = e;
     if (e[0].typeName !== 'ZBAR_QRCODE') {
@@ -89,7 +97,12 @@ export class SellProductComponent implements OnInit {
       );
       this.showProduct = findProductInStore;
       if (findProductInStore.length !== 0) {
-        this.productScanned.push(findProductInStore);
+        const arrProduct = {
+          ...findProductInStore,
+          qty: '1',
+        };
+        this.productScanned.push(arrProduct);
+        this.onOpenDialog('scan-success');
       }
 
       console.log(findProductInStore);
@@ -129,5 +142,18 @@ export class SellProductComponent implements OnInit {
 
   onBack() {
     this.route.navigate(['menu']);
+  }
+}
+
+@Component({
+  selector: 'dialog-selling',
+  templateUrl: './dialog-selling.html',
+  styleUrls: ['./sell-product.component.scss'],
+})
+export class DialogSelling {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: string) {}
+
+  ngOnInit() {
+    console.log(this.data);
   }
 }
