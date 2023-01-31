@@ -24,6 +24,7 @@ export class SellProductComponent implements OnInit {
 
   productInStore: any = [];
   productScanned: IProduct[] = [];
+  totalPrice = 0;
 
   showProduct: any = '';
 
@@ -92,6 +93,51 @@ export class SellProductComponent implements OnInit {
       .subscribe(() => (this.stopScanner = false));
   }
 
+  manualAddBarcode() {
+    const findProductInStore = this.productInStore.find(
+      (code: any) =>
+        this.getSellingFormByName('manualProductCode').value == code.productCode
+    );
+    console.log(findProductInStore);
+
+    this.showProduct = findProductInStore;
+    if (!!findProductInStore) {
+      if (findProductInStore.length !== 0) {
+        let arrProduct = {
+          ...findProductInStore,
+          qty: 1,
+        };
+        const findProduceInTable = this.productScanned.findIndex(
+          (dataInTable) =>
+            dataInTable.productCode == findProductInStore.productCode
+        );
+
+        ///// if table already product +1
+        if (findProduceInTable !== -1) {
+          this.productScanned[findProduceInTable].qty++;
+        } else {
+          this.productScanned.push(arrProduct);
+        }
+
+        this.stopScanner = true;
+        this.onOpenDialog('scan-success');
+
+        ///// calculate total price
+        const calculateTotalPrice = this.productScanned;
+
+        this.totalPrice = calculateTotalPrice
+          .map((itemInTable) => itemInTable.price * itemInTable.qty)
+          .reduce((a, b) => a + b, 0);
+
+        console.log(this.totalPrice);
+
+        console.log(this.productScanned);
+      }
+    } else {
+      this.onOpenDialog('no-product');
+    }
+  }
+
   onEvent(e: ScannerQRCodeResult[]): void {
     this.showScannerResult = e;
     if (e[0].typeName !== 'ZBAR_QRCODE' && !this.stopScanner) {
@@ -120,6 +166,17 @@ export class SellProductComponent implements OnInit {
 
         this.stopScanner = true;
         this.onOpenDialog('scan-success');
+
+        ///// calculate total price
+        const calculateTotalPrice = this.productScanned;
+
+        this.totalPrice = calculateTotalPrice
+          .map((itemInTable) => itemInTable.price * itemInTable.qty)
+          .reduce((a, b) => a + b, 0);
+
+        console.log(this.totalPrice);
+
+        console.log(this.productScanned);
       }
 
       console.log(findProductInStore);

@@ -1,3 +1,6 @@
 <div class="dialog-selling">
-  <label>scan success</label>
+  <ng-container [ngSwitch]="data">
+    <label *ngSwitchCase="'scan-success'">Add Product</label>
+    <label *ngSwitchCase="'no-product'">No Product</label>
+  </ng-container>
 </div>
