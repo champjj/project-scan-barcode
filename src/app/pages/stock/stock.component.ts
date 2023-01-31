@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-stock',
@@ -32,7 +33,10 @@ export class StockComponent implements OnInit {
       qty: '3',
     },
   ];
-  constructor() {}
+  constructor(private route: Router) {}
 
   ngOnInit(): void {}
+  onBack() {
+    this.route.navigate(['menu']);
+  }
 }
