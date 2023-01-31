@@ -166,6 +166,7 @@ export class DialogEditScanner {
     this.showScannerResult = e;
     if (e[0].typeName !== 'ZBAR_QRCODE') {
       this.productCode = e[0].value;
+      alert(e[0].value);
       this.onCloseDialog(e[0].value);
       console.log(e);
     }
