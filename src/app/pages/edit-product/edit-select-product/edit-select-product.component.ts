@@ -83,9 +83,10 @@ export class EditSelectProductComponent implements OnInit {
   trackerProductCode() {
     this.serviceEditProduct.productCode$
       .pipe(
-        tap((code) =>
-          this.getEditProductFormByName('productCode').patchValue(code)
-        )
+        tap((code) => {
+          alert(code);
+          this.getEditProductFormByName('productCode').patchValue(code);
+        })
       )
       .subscribe();
   }
