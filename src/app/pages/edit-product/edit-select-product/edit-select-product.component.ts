@@ -84,7 +84,7 @@ export class EditSelectProductComponent implements OnInit {
     this.serviceEditProduct.productCode$
       .pipe(
         tap((code) => {
-          alert(code);
+          alert('trackerProductCode ' + code);
           this.getEditProductFormByName('productCode').patchValue(code);
         })
       )
@@ -202,10 +202,12 @@ export class DialogEditScanner {
   }
 
   onCloseDialog(barcode: string) {
-    alert(barcode);
+    alert('onCloseDialog' + barcode);
     if (this.productCode) {
-      this.serviceDataAddProduct.setProductCode(barcode);
       this.dialogRef.close();
+      this.dialogRef
+        .beforeClosed()
+        .subscribe(() => this.serviceDataAddProduct.setProductCode(barcode));
     }
   }
 }
