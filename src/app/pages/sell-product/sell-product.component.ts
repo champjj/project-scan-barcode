@@ -84,9 +84,12 @@ export class SellProductComponent implements OnInit {
   }
 
   onOpenDialog(codeCase: string) {
-    this.dialog.open(DialogSelling, {
-      data: codeCase,
-    });
+    this.dialog
+      .open(DialogSelling, {
+        data: codeCase,
+      })
+      .afterClosed()
+      .subscribe(() => (this.stopScanner = false));
   }
 
   onEvent(e: ScannerQRCodeResult[]): void {
