@@ -21,7 +21,6 @@ export class SellProductComponent implements OnInit {
 
   productInStore: any = [];
   productScanned: IProduct[] = [];
-  displayedColumns: string[] = ['productCode', 'productName', 'price', 'qty'];
 
   showProduct: any = '';
 
