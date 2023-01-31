@@ -165,7 +165,7 @@ export class DialogEditScanner {
     this.showScannerResult = e;
     if (e[0].typeName !== 'ZBAR_QRCODE') {
       this.productCode = e[0].value;
-      this.onCloseDialog();
+      this.onCloseDialog(e[0].value);
       console.log(e);
     }
   }
@@ -199,9 +199,9 @@ export class DialogEditScanner {
     );
   }
 
-  onCloseDialog() {
+  onCloseDialog(barcode: string) {
     if (this.productCode) {
-      this.serviceDataAddProduct.setProductCode(this.productCode);
+      this.serviceDataAddProduct.setProductCode(barcode);
       this.dialogRef.close();
     }
   }
