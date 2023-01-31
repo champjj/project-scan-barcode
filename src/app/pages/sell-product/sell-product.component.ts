@@ -89,7 +89,7 @@ export class SellProductComponent implements OnInit {
         (code: any) => e[0].value == code.productCode
       );
       this.showProduct = findProductInStore;
-      if (findProductInStore) {
+      if (findProductInStore.length !== 0) {
         this.productScanned.push(findProductInStore);
       }
 
