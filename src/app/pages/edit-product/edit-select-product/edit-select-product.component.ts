@@ -201,6 +201,7 @@ export class DialogEditScanner {
   }
 
   onCloseDialog(barcode: string) {
+    alert(barcode);
     if (this.productCode) {
       this.serviceDataAddProduct.setProductCode(barcode);
       this.dialogRef.close();
