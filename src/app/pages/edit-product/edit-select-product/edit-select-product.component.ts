@@ -84,7 +84,7 @@ export class EditSelectProductComponent implements OnInit {
     this.serviceEditProduct.productCode$
       .pipe(
         tap((code) => {
-          alert('trackerProductCode ' + code);
+          alert('trackerProductCode22 ' + code);
           this.getEditProductFormByName('productCode').patchValue(code);
         })
       )
