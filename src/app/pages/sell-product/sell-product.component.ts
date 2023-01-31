@@ -102,11 +102,22 @@ export class SellProductComponent implements OnInit {
       );
       this.showProduct = findProductInStore;
       if (findProductInStore.length !== 0) {
-        const arrProduct = {
+        let arrProduct = {
           ...findProductInStore,
-          qty: '1',
+          qty: 1,
         };
-        this.productScanned.push(arrProduct);
+        const findProduceInTable = this.productScanned.findIndex(
+          (dataInTable) =>
+            dataInTable.productCode == findProductInStore.productCode
+        );
+
+        ///// if table already product +1
+        if (findProduceInTable !== -1) {
+          this.productScanned[findProduceInTable].qty++;
+        } else {
+          this.productScanned.push(arrProduct);
+        }
+
         this.stopScanner = true;
         this.onOpenDialog('scan-success');
       }
