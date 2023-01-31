@@ -1,7 +1,12 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ScannerQRCodeConfig, ScannerQRCodeResult } from 'ngx-scanner-qrcode';
 import { tap } from 'rxjs';
+import { IProduct } from 'src/app/@core/models/products-models';
 import { IScannerDevice } from 'src/app/@core/models/scanner-models';
+import { ApiServiceService } from 'src/app/@core/services/api-service.service';
+
 @Component({
   selector: 'app-sell-product',
   templateUrl: './sell-product.component.html',
@@ -9,6 +14,17 @@ import { IScannerDevice } from 'src/app/@core/models/scanner-models';
   encapsulation: ViewEncapsulation.None,
 })
 export class SellProductComponent implements OnInit {
+  sellingForm = this.fb.group({
+    mobileMember: [''],
+    manualProductCode: [''],
+  });
+
+  productInStore: any = [];
+  productScanned: IProduct[] = [];
+  displayedColumns: string[] = ['productCode', 'productName', 'price', 'qty'];
+
+  showProduct: any = '';
+
   showData: any;
 
   deviceIdFacingback: any;
@@ -31,9 +47,18 @@ export class SellProductComponent implements OnInit {
     },
   };
 
-  constructor() {}
+  constructor(
+    private apiService: ApiServiceService,
+    private route: Router,
+    private fb: FormBuilder
+  ) {}
   ngOnInit(): void {
     this.onClickInit();
+    this.initGetDataProducts();
+  }
+
+  getSellingFormByName(name: string) {
+    return this.sellingForm.get(name) as FormControl;
   }
 
   onClickInit() {
@@ -43,11 +68,33 @@ export class SellProductComponent implements OnInit {
     btnScanner.click();
   }
 
+  initGetDataProducts() {
+    this.apiService
+      .getProducts()
+      .pipe(
+        tap((value) => {
+          this.productInStore = value;
+          console.log(this.productInStore);
+        })
+      )
+      .subscribe();
+  }
+
   onEvent(e: ScannerQRCodeResult[]): void {
     this.showScannerResult = e;
     if (e[0].typeName !== 'ZBAR_QRCODE') {
       this.value = e[0].value;
-      alert('data' + e[0].value);
+      // alert('data' + e[0].value);
+      const findProductInStore = this.productInStore.find(
+        (code: any) => e[0].value == code.productCode
+      );
+      this.showProduct = findProductInStore;
+      if (findProductInStore) {
+        this.productScanned.push(findProductInStore);
+      }
+
+      console.log(findProductInStore);
+
       console.log(e);
     }
   }
@@ -79,5 +126,9 @@ export class SellProductComponent implements OnInit {
     action.playDevice(
       findFacingback !== -1 ? data[findFacingback].deviceId : 0
     );
+  }
+
+  onBack() {
+    this.route.navigate(['menu']);
   }
 }

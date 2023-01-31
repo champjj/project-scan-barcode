@@ -53,4 +53,15 @@ body {
   .btn-back {
     background-color: gray;
   }
+  .cover-btn-footer {
+    position: fixed;
+    bottom: 0px;
+    padding: 10px 1rem;
+    width: 100%;
+    background-color: white;
+    button {
+      width: 92%;
+      height: 40px;
+    }
+  }
 }

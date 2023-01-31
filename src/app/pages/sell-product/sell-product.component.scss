@@ -1,4 +1,5 @@
 .sell-product {
+  padding: 0 0 5rem 0;
   .container {
     margin: 1rem;
     .selectbox-select-device {
@@ -18,6 +19,9 @@
       border-radius: 10px;
       font-weight: 600;
     }
+  }
+  .table-selling-product {
+    width: 100%;
   }
   .hidden {
     display: none;

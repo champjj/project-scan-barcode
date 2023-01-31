@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 
 import { SellProductComponent } from './sell-product/sell-product.component';
 import {
@@ -58,6 +59,7 @@ import {
     MatCardModule,
     MatDialogModule,
     MatSelectModule,
+    MatTableModule,
     //////////
   ],
   providers: [],
