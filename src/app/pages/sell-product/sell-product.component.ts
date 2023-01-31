@@ -20,6 +20,8 @@ export class SellProductComponent implements OnInit {
     manualProductCode: [''],
   });
 
+  stopScanner = false;
+
   productInStore: any = [];
   productScanned: IProduct[] = [];
 
@@ -89,7 +91,7 @@ export class SellProductComponent implements OnInit {
 
   onEvent(e: ScannerQRCodeResult[]): void {
     this.showScannerResult = e;
-    if (e[0].typeName !== 'ZBAR_QRCODE') {
+    if (e[0].typeName !== 'ZBAR_QRCODE' && !this.stopScanner) {
       this.value = e[0].value;
       // alert('data' + e[0].value);
       const findProductInStore = this.productInStore.find(
@@ -102,6 +104,7 @@ export class SellProductComponent implements OnInit {
           qty: '1',
         };
         this.productScanned.push(arrProduct);
+        this.stopScanner = true;
         this.onOpenDialog('scan-success');
       }
 
