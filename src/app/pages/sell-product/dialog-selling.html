@@ -118,21 +118,24 @@
             <td class="text-center">{{+order.price * order.qty}}</td>
             <td class="text-center">{{order.qty}}</td>
           </tr>
-          <tr *ngIf="!!data.item.memberName">
-            <td><b>Discount</b></td>
-            <td></td>
-            <td colspan="2" style="text-align: end">
-              {{shopData.discountMember}}
-            </td>
-          </tr>
+          <ng-container *ngIf="!!data.item.memberName">
+            <tr>
+              <td><b>Sub total</b></td>
+              <td></td>
+              <td colspan="2" style="text-align: end">
+                {{data.item.totalPrice}}
+              </td>
+            </tr>
+            <tr>
+              <td><b>Discount</b></td>
+              <td></td>
+              <td colspan="2" style="text-align: end">{{discountPrice}}</td>
+            </tr>
+          </ng-container>
           <tr>
             <td><b>Total Price</b></td>
             <td></td>
-            <td colspan="2" style="text-align: end">
-              {{ data.item.memberName ? data.item.totalPrice -
-              ((shopData.discountMember / 100) *data.item.totalPrice)
-              :data.item.totalPrice }}
-            </td>
+            <td colspan="2" style="text-align: end">{{ totalPrice}}</td>
           </tr>
         </table>
         <hr />

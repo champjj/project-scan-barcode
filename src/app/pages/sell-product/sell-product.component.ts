@@ -239,6 +239,7 @@ export class SellProductComponent implements OnInit {
       memberMobile: this.dataMember ? this.dataMember!.mobileNumber : '',
     };
     this.apiService.addHistory(dataHistory);
+    console.log(dataHistory);
 
     ///// calculate stock
 
@@ -420,6 +421,9 @@ export class DialogSelling {
 
   cacheMemberData = 0;
 
+  totalPrice = 0;
+  discountPrice = 0;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
@@ -449,7 +453,21 @@ export class DialogSelling {
       this.getItemFormByName('qty').patchValue(qty);
     }
     if (this.data.codeCase == 'bill') {
+      console.log('this.shopData.discountMember', this.shopData.discountMember);
+
+      const totalPrice = Math.floor(this.data.item.totalPrice);
+      const discount = Math.floor(
+        (this.shopData.discountMember / 100) * totalPrice
+      );
+
+      this.discountPrice = discount;
+
+      this.totalPrice = this.data.item.memberName
+        ? totalPrice - discount
+        : totalPrice;
+
       console.log(this.data.item);
+      console.log({ discount });
     }
   }
 
