@@ -80,9 +80,9 @@ export class EditSelectProductComponent implements OnInit {
     this.dialog
       .open(DialogEditScanner, {})
       .afterClosed()
-      .subscribe((barCode) =>
-        this.getEditProductFormByName('productCode').patchValue(barCode)
-      );
+      .subscribe((barCode) => {
+        this.getEditProductFormByName('productCode').patchValue(barCode.data);
+      });
   }
 
   onSave() {
