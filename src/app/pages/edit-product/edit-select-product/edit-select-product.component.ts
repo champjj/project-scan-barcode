@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ScannerQRCodeConfig, ScannerQRCodeResult } from 'ngx-scanner-qrcode';
 import { tap } from 'rxjs';
 import { IProduct } from 'src/app/@core/models/products-models';
 import { IScannerDevice } from 'src/app/@core/models/scanner-models';
 import { ApiServiceService } from 'src/app/@core/services/api-service.service';
-import { DialogAddProduct } from '../../add-product/add-product.component';
 import { ServiceDataAddProductService } from '../../add-product/service-data-add-product.service';
 import { ServiceEditProductService } from './service-edit-product.service';
 
@@ -75,20 +78,11 @@ export class EditSelectProductComponent implements OnInit {
   }
   onOpenScanner() {
     this.dialog
-      .open(DialogAddProduct, {})
+      .open(DialogEditScanner, {})
       .afterClosed()
-      .subscribe(() => this.trackerProductCode());
-  }
-
-  trackerProductCode() {
-    this.serviceEditProduct.productCode$
-      .pipe(
-        tap((code) => {
-          alert('trackerProductCode22 ' + code);
-          this.getEditProductFormByName('productCode').patchValue(code);
-        })
-      )
-      .subscribe();
+      .subscribe((barCode) =>
+        this.getEditProductFormByName('productCode').patchValue(barCode)
+      );
   }
 
   onSave() {
@@ -147,7 +141,8 @@ export class DialogEditScanner {
     },
   };
   constructor(
-    public dialogRef: MatDialogRef<DialogAddProduct>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<DialogEditScanner>,
     private serviceDataAddProduct: ServiceDataAddProductService
   ) {}
 
@@ -167,7 +162,7 @@ export class DialogEditScanner {
     if (e[0].typeName !== 'ZBAR_QRCODE') {
       this.productCode = e[0].value;
       this.serviceDataAddProduct.setProductCode(e[0].value);
-      this.onCloseDialog(e[0].value);
+      this.onCloseDialog();
       console.log(e);
     }
   }
@@ -201,10 +196,9 @@ export class DialogEditScanner {
     );
   }
 
-  onCloseDialog(barcode: string) {
-    alert('onCloseDialog' + barcode);
+  onCloseDialog() {
     if (this.productCode) {
-      this.dialogRef.close();
+      this.dialogRef.close({ data: this.productCode });
     }
   }
 }
