@@ -13,8 +13,9 @@ export class CInputComponent implements OnInit {
   @Input() placeholder = '';
   @Input() inputType!: string;
   @Input() required!: boolean;
-  @Input() maxlength!: number;
-  @Input() minlength!: number;
+  @Input() maxlength!: string;
+  @Input() minlength!: string;
+  @Input() onlyNumber!: boolean;
 
   constructor() {}
 

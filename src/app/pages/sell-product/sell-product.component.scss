@@ -37,6 +37,7 @@
   .table-selling-product {
     width: 92%;
     margin: 4%;
+    table-layout: fixed;
     th {
       padding: 4px;
       border-bottom: 2px solid gray;
@@ -45,13 +46,31 @@
       padding: 4px;
       border-bottom: 2px solid gray;
     }
-    .table-text-max-length {
-      display: -webkit-box;
-      overflow: hidden;
-      -webkit-line-clamp: 1;
-      -webkit-box-orient: vertical;
-      line-height: 22px;
+    .table-header {
+      &-count {
+        width: 36px;
+      }
+      &-product {
+        width: 24%;
+      }
+      &-code {
+        width: 34%;
+      }
     }
+    .table-detail {
+      &-code {
+        width: 34%;
+      }
+      &-product-name {
+        width: 24%;
+        word-wrap: break-word;
+      }
+    }
+  }
+  .cover-btn-order {
+    display: flex;
+    margin: 1rem;
+    justify-content: space-around;
   }
   .cover-input-member {
     display: flex;
@@ -74,5 +93,27 @@
   }
   .hidden-scanner {
     height: 0px;
+  }
+}
+
+///// dialog
+.cover-bill {
+  &-btn {
+    margin: 1rem;
+    text-align: center;
+    button {
+      width: 100%;
+    }
+  }
+}
+.cover-register {
+  &-btn {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0 0 0;
+    row-gap: 14px;
+    button {
+      width: 100%;
+    }
   }
 }

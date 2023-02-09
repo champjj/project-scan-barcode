@@ -84,27 +84,49 @@
 
   <table class="table-selling-product">
     <tr>
-      <th>BCode</th>
-      <th>Product</th>
+      <th class="table-header-count">No.</th>
+      <th class="table-header-code">BCode</th>
+      <th class="table-header-product">Product</th>
       <th>Price</th>
       <th>qty</th>
     </tr>
-    <tr *ngFor="let item of productScanned">
-      <td>{{ item.productCode }}</td>
-      <td class="table-text-max-length">{{ item.productName }}</td>
-      <td>{{ item.price }}</td>
-      <td>{{ item.qty }}</td>
+    <tr *ngFor="let item of productScanned; index as i">
+      <td class="text-center">
+        {{ i + 1 }}
+      </td>
+      <td class="table-detail-code">{{ item.productCode }}</td>
+      <td class="table-detail-product-name">{{ item.productName }}</td>
+      <td class="text-center">{{ item.price }}</td>
+      <td (click)="adjustQTY(i, item)" class="text-center">
+        {{ item.qty }}
+      </td>
     </tr>
 
     <tr>
       <td><b>Total Price</b></td>
       <td></td>
-      <td>
-        <b>{{ totalPrice }}</b>
-      </td>
       <td></td>
+      <td colspan="2" style="text-align: end">
+        <b>{{ totalPrice | number }}</b>
+      </td>
     </tr>
   </table>
+  <div class="cover-btn-order">
+    <button
+      [disabled]="disabledBtnOrder()"
+      (click)="onConfirmOrder()"
+      mat-raised-button
+    >
+      Confirm Order
+    </button>
+    <button
+      [disabled]="disabledBtnOrder()"
+      (click)="onClearAllOrder()"
+      mat-raised-button
+    >
+      Clear All Order
+    </button>
+  </div>
   <hr />
   <div class="cover-input-member">
     <label class="text-header-input-member">Member</label>
@@ -114,12 +136,15 @@
       [inputType]="'number'"
     ></c-input>
     <button
-      [disabled]="!getSellingFormByName('mobileMember').value"
+      [disabled]="getSellingFormByName('mobileMember').invalid"
       mat-raised-button
+      (click)="onSetMember()"
     >
-      Check Member
+      Member
     </button>
-    <button mat-raised-button>Register New Member</button>
+    <button (click)="onRegisterMemberPopup()" mat-raised-button>
+      Register New Member
+    </button>
   </div>
 </div>
 <div class="cover-btn-footer">

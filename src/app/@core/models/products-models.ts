@@ -9,10 +9,10 @@ export interface IProduct {
 
 export interface IHistorySelling {
   productName: string;
-  qty: string;
+  qty: number;
   price: number;
   category: string;
-  timeStamp: string;
+  timeStamp: number;
   memberName: string;
   memberMobile: string;
 }

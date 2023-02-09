@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { IProduct } from '../models/products-models';
-import { IUser } from '../models/users-models';
+import { IHistorySelling, IProduct } from '../models/products-models';
+import { IMember, IUser } from '../models/users-models';
 
 @Injectable({
   providedIn: 'root',
@@ -108,4 +108,91 @@ export class ApiServiceService {
   }
 
   ///// end api product /////
+
+  ///// api member /////
+
+  addNewMember(data: IMember) {
+    return this.firestore
+      .collection('users')
+      .doc(this.getUser.username)
+      .collection('member')
+      .doc()
+      .set({
+        memberName: data.memberName,
+        mobileNumber: data.mobileNumber,
+        lastorderTimestamp: '',
+      });
+  }
+
+  queryMemberByMobile(mobile: string) {
+    return this.firestore
+      .collection('users')
+      .doc(this.getUser.username)
+      .collection('member', (ref) => ref.where('mobileNumber', '==', mobile))
+      .valueChanges({
+        idField: 'id',
+      });
+  }
+
+  updateMember(id: string, data: IMember) {
+    return this.firestore
+      .collection('users')
+      .doc(this.getUser.username)
+      .collection('member')
+      .doc(id)
+      .update({
+        memberName: data.memberName,
+        mobileNumber: data.mobileNumber,
+        lastorderTimestamp: data.lastorderTimestamp,
+      });
+  }
+
+  deleteMember(id: string) {
+    return this.firestore
+      .collection('users')
+      .doc(this.getUser.username)
+      .collection('member')
+      .doc(id)
+      .delete();
+  }
+
+  ///// end api member /////
+
+  ///// api history /////
+
+  addHistory(data: IHistorySelling) {
+    return this.firestore
+      .collection('users')
+      .doc(this.getUser.username)
+      .collection('historys')
+      .doc()
+      .set({
+        productName: data.productName,
+        qty: data.qty,
+        price: data.price,
+        category: data.category,
+        memberName: data.memberName,
+        mobileNumber: data.memberMobile,
+        timeStamp: '',
+      });
+  }
+
+  getHistory() {
+    return this.firestore
+      .collection('users')
+      .doc(this.getUser.username)
+      .collection('historys')
+      .valueChanges({ idField: 'id' });
+  }
+
+  deleteHistory(id: string) {
+    return this.firestore
+      .collection('users')
+      .doc(this.getUser.username)
+      .collection('historys')
+      .doc(id)
+      .delete();
+  }
+
+  ///// end api history /////
 }

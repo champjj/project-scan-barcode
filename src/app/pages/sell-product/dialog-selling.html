@@ -1,6 +1,148 @@
 <div class="dialog-selling">
-  <ng-container [ngSwitch]="data">
+  <!-- <label mat-dialog-title><b>Selling Page</b></label> -->
+  <!-- <hr /> -->
+  <ng-container [ngSwitch]="data.codeCase">
     <label *ngSwitchCase="'scan-success'">Add Product</label>
     <label *ngSwitchCase="'no-product'">No Product</label>
+    <label *ngSwitchCase="'no-member'">No Member</label>
+    <label *ngSwitchCase="'member-success'">Add Member Success</label>
+    <ng-container *ngSwitchCase="'remove-all-item'">
+      <p>Confirm Remove All Product</p>
+
+      <div style="display: flex; justify-content: space-around">
+        <button mat-raised-button (click)="onCloseDialog('confirm')">
+          Confirm
+        </button>
+        <button mat-raised-button (click)="onCloseDialog('cancel')">
+          Cancel
+        </button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'adjust-qty'">
+      <p style="color: red">*product qty 0 = remove product</p>
+      <p>{{data.item.productName}}</p>
+      <c-input
+        [placeholder]="'Quatity'"
+        [control]="getItemFormByName('qty')"
+        [inputType]="'number'"
+      ></c-input>
+      <br />
+      <button
+        [disabled]="this.getItemFormByName('qty').invalid"
+        style="width: 100%"
+        mat-raised-button
+        (click)="onCloseDialog()"
+      >
+        Confirm
+      </button>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'confirm-order'">
+      <p>Confirm Order</p>
+      <div
+        style="display: flex; justify-content: space-around; column-gap: 20px"
+      >
+        <button mat-raised-button (click)="onCloseDialog('confirm')">
+          Confirm
+        </button>
+        <button mat-raised-button (click)="onCloseDialog('cancel')">
+          Cancel
+        </button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'register-member'">
+      <p><b>Register Member</b></p>
+      <div class="cover-register">
+        <c-input
+          [placeholder]="'Name'"
+          [control]="getRegisterMemberFormByName('memberName')"
+          [inputType]="'text'"
+        ></c-input
+        ><c-input
+          [placeholder]="'Phone Number'"
+          [control]="getRegisterMemberFormByName('memberNumber')"
+          [inputType]="'number'"
+        ></c-input>
+        <div class="cover-register-btn">
+          <button
+            [disabled]="disabledRegisterBtn()"
+            mat-raised-button
+            (click)="onRegisterMember()"
+          >
+            Confirm
+          </button>
+          <button mat-raised-button (click)="onCloseDialog()">Cancel</button>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'register-success'">
+      <p>Register Success</p>
+
+      <button
+        style="width: 100%; margin: 1rem 0 0 0"
+        mat-raised-button
+        (click)="onCloseDialog('register-success')"
+      >
+        Confirm
+      </button>
+    </ng-container>
+    <ng-container *ngSwitchCase="'register-fail'">
+      <p>Phone number is already used</p>
+      <button
+        style="width: 100%; margin: 1rem 0 0 0"
+        mat-raised-button
+        (click)="backToRegisterDialog()"
+      >
+        Confirm
+      </button>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'bill'">
+      <div class="cover-bill">
+        <p>Shop name : {{shopData.shopname}}</p>
+        <hr />
+        <p>Date {{today | date:'dd/MM/yyyy'}}</p>
+        <table>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Total<br />Price</th>
+            <th>qty</th>
+          </tr>
+          <tr *ngFor="let order of data.item.order">
+            <td>{{order.productName}}</td>
+            <td class="text-center">{{order.price}}</td>
+            <td class="text-center">{{+order.price * order.qty}}</td>
+            <td class="text-center">{{order.qty}}</td>
+          </tr>
+          <tr *ngIf="!!data.item.memberName">
+            <td><b>Discount</b></td>
+            <td></td>
+            <td colspan="2" style="text-align: end">
+              {{shopData.discountMember}}
+            </td>
+          </tr>
+          <tr>
+            <td><b>Total Price</b></td>
+            <td></td>
+            <td colspan="2" style="text-align: end">
+              {{ data.item.memberName ? data.item.totalPrice -
+              ((shopData.discountMember / 100) *data.item.totalPrice)
+              :data.item.totalPrice }}
+            </td>
+          </tr>
+        </table>
+        <hr />
+        <p>
+          Member : {{data.item.memberName ? data.item.memberName : 'no member'}}
+        </p>
+      </div>
+      <div class="cover-bill-btn">
+        <button (click)="onCloseDialog()" mat-raised-button>Close</button>
+      </div>
+    </ng-container>
   </ng-container>
 </div>

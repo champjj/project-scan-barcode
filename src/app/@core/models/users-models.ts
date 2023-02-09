@@ -11,5 +11,5 @@ export interface IUser {
 export interface IMember {
   memberName: string;
   mobileNumber: string;
-  lastorderTimestamp: string;
+  lastorderTimestamp: number | string;
 }

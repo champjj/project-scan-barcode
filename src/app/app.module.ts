@@ -14,7 +14,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServicesModuleModule } from './@core/services/services-module.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
 import { ComponentModule } from './components/component.module';
 import { CommonModule } from '@angular/common';
 
