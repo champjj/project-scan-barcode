@@ -98,12 +98,12 @@ export class ApiServiceService {
       });
   }
 
-  deleteProduct(username: string, productCode: string) {
+  deleteProduct(id: string) {
     return this.firestore
       .collection('users')
-      .doc(username)
+      .doc(this.getUser.username)
       .collection('products')
-      .doc(productCode)
+      .doc(id)
       .delete();
   }
 

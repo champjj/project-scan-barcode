@@ -12,7 +12,7 @@ import { IProduct } from 'src/app/@core/models/products-models';
 import { IScannerDevice } from 'src/app/@core/models/scanner-models';
 import { ApiServiceService } from 'src/app/@core/services/api-service.service';
 import { ServiceDataAddProductService } from '../../add-product/service-data-add-product.service';
-import { ServiceEditProductService } from './service-edit-product.service';
+import { ServiceEditProductService } from '../service-edit-product.service';
 
 @Component({
   selector: 'app-edit-select-product',
@@ -30,6 +30,12 @@ export class EditSelectProductComponent implements OnInit {
   });
 
   disbledBtnWhenLoad = false;
+
+  cacheEditProduct = false;
+
+  initFirstTime = false;
+
+  stayThisPage = true;
 
   idProduct = '';
 
@@ -60,11 +66,15 @@ export class EditSelectProductComponent implements OnInit {
       .queryProductByCode(code)
       .pipe(
         tap((data) => {
-          console.log(data);
-          this.idProduct = data[0].id;
+          if (this.initFirstTime == false) {
+            console.log(data);
+            this.idProduct = data[0].id;
+            this.setFormControl(data[0]);
+            this.initFirstTime = true;
+          }
         })
       )
-      .subscribe((data) => this.setFormControl(data[0]));
+      .subscribe((data) => {});
   }
   setFormControl(data: any) {
     this.editProduct.setValue({
@@ -87,27 +97,54 @@ export class EditSelectProductComponent implements OnInit {
 
   onSave() {
     this.disbledBtnWhenLoad = true;
-    const dataProduct: IProduct = {
-      productName: this.getEditProductFormByName('productName').value,
-      productCode: this.getEditProductFormByName('productCode').value,
-      imageProduct: this.getEditProductFormByName('imageProduct').value,
-      qty: this.getEditProductFormByName('quantity').value,
-      price: this.getEditProductFormByName('price').value,
-      category: this.getEditProductFormByName('category').value,
-    };
 
-    this.apiService
-      .updateProduct(this.idProduct, dataProduct)
-      .then(() => this.onOpenStatus());
+    this.serviceEditProduct.productInStockEditPage$
+      .pipe(
+        tap((products) => {
+          console.log(products);
+          const filerBarcode = products.filter(
+            (product) =>
+              product['productCode'] ==
+              this.getEditProductFormByName('productCode').value
+          );
+          if (filerBarcode.length < 1 && this.cacheEditProduct == false) {
+            const dataProduct: IProduct = {
+              productName: this.getEditProductFormByName('productName').value,
+              productCode: this.getEditProductFormByName('productCode').value,
+              imageProduct: this.getEditProductFormByName('imageProduct').value,
+              qty: this.getEditProductFormByName('quantity').value,
+              price: this.getEditProductFormByName('price').value,
+              category: this.getEditProductFormByName('category').value,
+            };
+
+            this.apiService
+              .updateProduct(this.idProduct, dataProduct)
+              .then(() => this.onOpenStatus('success'));
+            this.cacheEditProduct = true;
+          } else if (
+            this.cacheEditProduct == false &&
+            this.stayThisPage == true
+          ) {
+            this.onOpenStatus('duplicate-code');
+            this.disbledBtnWhenLoad = false;
+          }
+        })
+      )
+      .subscribe();
   }
 
-  onOpenStatus() {
+  onOpenStatus(status: string) {
     this.dialog
-      .open(DialogEditStatus, {})
+      .open(DialogEditStatus, { data: status })
       .afterClosed()
-      .subscribe(() => this.onBack());
+      .subscribe(() => {
+        if (status == 'success') {
+          this.onBack();
+        }
+      });
   }
   onBack() {
+    this.stayThisPage = false;
     this.route.navigate(['edit-product']);
   }
 }
@@ -208,5 +245,11 @@ export class DialogEditScanner {
   styleUrls: ['./edit-select-product.component.scss'],
 })
 export class DialogEditStatus {
-  constructor(public dialogRef: MatDialogRef<DialogEditStatus>) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<DialogEditStatus>
+  ) {}
+  ngOnInit(): void {
+    console.log(this.data);
+  }
 }

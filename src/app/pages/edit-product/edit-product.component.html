@@ -9,7 +9,19 @@
           <li>qty : {{ item.qty }}</li>
           <li>Category : {{ item.category }}</li>
         </ul>
-        <button (click)="onSelectProduct(item)" mat-raised-button>Edit</button>
+
+        <div class="card-product-btn">
+          <button (click)="onSelectProduct(item)" mat-raised-button>
+            Edit
+          </button>
+          <button
+            (click)="onDeleteProduct(item)"
+            mat-raised-button
+            color="warn"
+          >
+            Delete
+          </button>
+        </div>
       </mat-card>
     </div>
   </div>

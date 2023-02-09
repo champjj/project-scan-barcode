@@ -1,4 +1,7 @@
 <div class="dialog-edit-status">
   <label mat-dialog-title><b>Edit Product</b></label>
-  <p>Success</p>
+  <ng-container [ngSwitch]="data">
+    <div *ngSwitchCase="'success'">Success</div>
+    <div *ngSwitchCase="'duplicate-code'">Barcode is already used</div>
+  </ng-container>
 </div>

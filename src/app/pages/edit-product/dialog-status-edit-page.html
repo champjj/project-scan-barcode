@@ -1,0 +1,12 @@
+<div class="dialog-status-edit-page">
+  <label mat-dialog-title><b>Delete</b></label>
+  <hr />
+  <p>Confirm to delete product</p>
+  <p style="margin: 0 0 2rem 0" class="text-center">
+    <b>{{data.productName}}</b>
+  </p>
+  <div class="dialog-cover-btn">
+    <button (click)="onDelete('confirm')" mat-raised-button>Confirm</button>
+    <button (click)="onDelete('cancel')" mat-raised-button>Cancel</button>
+  </div>
+</div>

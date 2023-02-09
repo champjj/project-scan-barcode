@@ -15,15 +15,19 @@
         display: flex;
         justify-content: space-between;
         margin: 1rem 0;
+        &-btn {
+          row-gap: 14px;
+          display: flex;
+          flex-direction: column;
+          width: 30%;
+        }
       }
     }
   }
 }
-.dialog-edit-product {
-  .cover-edit-field {
-    .dialog-btn-save {
-      width: 100%;
-      margin: 2rem 0 0 0;
-    }
-  }
+
+///// dialog
+.dialog-cover-btn {
+  display: flex;
+  justify-content: space-between;
 }
