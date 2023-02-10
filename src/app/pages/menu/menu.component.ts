@@ -25,7 +25,7 @@ export class MenuComponent {
       link: 'edit-product',
     },
     {
-      menuName: 'Stock',
+      menuName: 'Report',
       image: '../../../assets/images/product.png',
       link: 'stock',
     },

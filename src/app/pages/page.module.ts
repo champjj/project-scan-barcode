@@ -13,6 +13,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 
+import { NgChartsModule } from 'ng2-charts';
+
 import {
   DialogSelling,
   SellProductComponent,
@@ -64,6 +66,7 @@ import {
     ComponentModule,
     ReactiveFormsModule,
     NgxScannerQrcodeModule,
+    NgChartsModule,
     ///// material
     MatButtonModule,
     MatCardModule,

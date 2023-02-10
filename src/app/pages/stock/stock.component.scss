@@ -1,20 +1,11 @@
 .stock {
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    font-size: 14px;
-    font-weight: 600;
-    word-break: break-word;
+  .chart-wrapper {
+    margin: 1rem;
   }
-  .cover-list-product {
-    .cover-card-product {
-      margin: 0 2rem;
-      .card-product {
-        display: flex;
-        justify-content: space-between;
-        margin: 1rem 0;
-      }
+  .cover-product-list {
+    margin: 1rem;
+    .table-best-seller {
+      width: 100%;
     }
   }
 }
