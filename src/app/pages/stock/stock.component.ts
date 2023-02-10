@@ -48,7 +48,7 @@ export class StockComponent implements OnInit {
       .pipe(
         tap((history) => {
           history.map((val, index, arr) => {
-            const setDateToLocalDate = new Date(
+            let setDateToLocalDate = new Date(
               val['timeStamp']
             ).toLocaleDateString('th', {
               month: '2-digit',
