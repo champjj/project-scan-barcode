@@ -17,6 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentModule } from './components/component.module';
 import { CommonModule } from '@angular/common';
 
+import { LayoutModule } from '@angular/cdk/layout';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -33,6 +35,7 @@ import { CommonModule } from '@angular/common';
     ServicesModuleModule,
     FormsModule,
     ComponentModule,
+    LayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

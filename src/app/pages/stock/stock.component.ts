@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, tap } from 'rxjs';
 import { ApiServiceService } from 'src/app/@core/services/api-service.service';
@@ -12,6 +12,7 @@ interface IArrValue {
   selector: 'app-stock',
   templateUrl: './stock.component.html',
   styleUrls: ['./stock.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class StockComponent implements OnInit {
   lineChartData = [{ data: [0], label: 'sales' }];
@@ -32,9 +33,14 @@ export class StockComponent implements OnInit {
   bestSellerList = new BehaviorSubject<any>('');
   bestSellerList$ = this.bestSellerList.asObservable();
 
+  listProductInWeek = new BehaviorSubject<any>('');
+  listProductInWeek$ = this.listProductInWeek.asObservable();
+
   arrValue = [] as IArrValue[];
 
   today = new Date().getTime();
+
+  loadingSpinner = true;
 
   constructor(private route: Router, private apiService: ApiServiceService) {}
 
@@ -71,6 +77,8 @@ export class StockComponent implements OnInit {
             (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
           );
 
+          console.log({ sortDataValueAndPrice });
+
           const showDate = sortDataValueAndPrice.map((data) => data.date);
           let countIndex = -1;
           let oldDate = '';
@@ -92,35 +100,33 @@ export class StockComponent implements OnInit {
 
           console.log(history);
 
-          let countIndexForBestSeller = -1;
-          let oldProductname = '';
           let mergeProductByName: any = [];
 
           history.map((val, index, arr) => {
             const filterProduct = mergeProductByName.filter(
               (value: any) => value.productName == val['productName']
             );
-            console.log(filterProduct.length);
+            // console.log(filterProduct.length);
 
             if (filterProduct.length == 0) {
-              console.log(true);
+              // console.log(true);
 
               mergeProductByName.push(val);
             } else {
-              console.log(false);
+              // console.log(false);
 
               const removeItem = mergeProductByName.filter(
                 (value: any) => value.productName !== val['productName']
               );
 
-              console.log(removeItem);
+              // console.log(removeItem);
 
               const mergeDataForQty = {
                 ...val,
                 qty: filterProduct[0].qty + val['qty'],
               };
 
-              console.log(removeItem);
+              // console.log(removeItem);
 
               mergeProductByName = removeItem;
               mergeProductByName.push(mergeDataForQty);
@@ -130,12 +136,21 @@ export class StockComponent implements OnInit {
           const setTopSeller = mergeProductByName
             .sort((a: any, b: any) => b['qty'] - a['qty'])
             .slice(0, 10);
+
           console.log(setTopSeller);
           this.bestSellerList.next(setTopSeller);
           ///// end list most best seller /////
+
+          ///// product in week /////
+          const allListProductInWeek = mergeProductByName.sort(
+            (a: any, b: any) => b['qty'] - a['qty']
+          );
+
+          this.listProductInWeek.next(allListProductInWeek);
+          ///// end product in week /////
         })
       )
-      .subscribe();
+      .subscribe(() => (this.loadingSpinner = false));
   }
 
   onBack() {

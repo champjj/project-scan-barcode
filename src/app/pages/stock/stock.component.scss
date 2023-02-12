@@ -4,8 +4,32 @@
   }
   .cover-product-list {
     margin: 1rem;
+    border-radius: 20px;
+    border: 2px solid gray;
+    position: relative;
+    &-label {
+      background-color: white;
+      position: absolute;
+      top: -12px;
+      left: 22px;
+    }
+
     .table-best-seller {
-      width: 100%;
+      width: 92%;
+      margin: 4%;
+      table-layout: fixed;
+      th {
+        padding: 4px;
+        border-bottom: 1px solid gray;
+        border-top: 1px solid gray;
+        font-size: 14px;
+      }
+      td {
+        padding: 4px;
+        border-bottom: 1px solid gray;
+        word-wrap: break-word;
+        font-size: 14px;
+      }
     }
   }
 }

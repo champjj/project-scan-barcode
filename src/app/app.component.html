@@ -1,1 +1,8 @@
-<router-outlet></router-outlet>
+<ng-container *ngIf="isMobileDevice$ | async; else noMobileDevice">
+  <router-outlet></router-outlet>
+</ng-container>
+<ng-template #noMobileDevice>
+  <div class="alertText">
+    <p>This web can open mobile view only</p>
+  </div>
+</ng-template>

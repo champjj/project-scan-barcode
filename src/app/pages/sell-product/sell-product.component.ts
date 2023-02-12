@@ -58,7 +58,7 @@ export class SellProductComponent implements OnInit {
   config: ScannerQRCodeConfig = {
     fps: 60,
     // isAuto: false,
-    isBeep: true,
+    isBeep: !this.stopScanner,
     // decode: 'macintosh',
     medias: {
       audio: false,

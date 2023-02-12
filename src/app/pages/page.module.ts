@@ -12,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { NgChartsModule } from 'ng2-charts';
 
@@ -73,6 +74,7 @@ import {
     MatDialogModule,
     MatSelectModule,
     MatTableModule,
+    MatProgressSpinnerModule,
     //////////
   ],
   providers: [],
