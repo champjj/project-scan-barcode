@@ -14,7 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-// import { NgChartsModule } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 
 import {
   DialogSelling,
@@ -67,7 +67,7 @@ import {
     ComponentModule,
     ReactiveFormsModule,
     NgxScannerQrcodeModule,
-    // NgChartsModule,
+    NgChartsModule,
     ///// material
     MatButtonModule,
     MatCardModule,
