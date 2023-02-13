@@ -112,7 +112,7 @@ export class DialogAddProduct {
     // isAuto: false,
     isBeep: true,
     // decode: 'macintosh',
-    medias: {
+    constraints: {
       audio: false,
       video: {
         width: window.innerWidth,

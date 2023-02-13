@@ -60,7 +60,7 @@ export class SellProductComponent implements OnInit {
     // isAuto: false,
     isBeep: !this.stopScanner,
     // decode: 'macintosh',
-    medias: {
+    constraints: {
       audio: false,
       video: {
         width: window.innerWidth,

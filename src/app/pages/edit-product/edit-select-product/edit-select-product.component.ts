@@ -170,7 +170,7 @@ export class DialogEditScanner {
     // isAuto: false,
     isBeep: true,
     // decode: 'macintosh',
-    medias: {
+    constraints: {
       audio: false,
       video: {
         width: window.innerWidth,
