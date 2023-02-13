@@ -49,9 +49,9 @@ export class ApiServiceService {
     });
   }
 
-  uploadImageUser(event:any){
+  uploadImageUser(event: any) {
     // const file = event
-    // const filePate = 
+    // const filePate =
   }
 
   ///// end api user /////
