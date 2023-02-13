@@ -53,31 +53,32 @@ export class StockComponent implements OnInit {
       .getHistory()
       .pipe(
         tap((history) => {
-          history.map((val, index, arr) => {
-            let setDateToLocalDate = new Date(
-              val['timeStamp']
-            ).toLocaleDateString('th', {
-              month: '2-digit',
-              day: '2-digit',
-            });
-
-            ///// set 7 day sales for draft chart /////
-            if (val['timeStamp'] > this.today - 86400000 * 7) {
-              this.arrValue.push({
-                value: val['qty'],
-                date: setDateToLocalDate,
+          history
+            .sort(
+              (a, b) =>
+                new Date(a['timeStamp']).getTime() -
+                new Date(b['timeStamp']).getTime()
+            )
+            .map((val, index, arr) => {
+              let setDateToLocalDate = new Date(
+                val['timeStamp']
+              ).toLocaleDateString('th', {
+                month: '2-digit',
+                day: '2-digit',
               });
-              return setDateToLocalDate;
-            } else {
-              return setDateToLocalDate;
-            }
-          });
 
-          const sortDataValueAndPrice = this.arrValue.sort(
-            (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-          );
-
-          console.log({ sortDataValueAndPrice });
+              ///// set 7 day sales for draft chart /////
+              if (val['timeStamp'] > this.today - 86400000 * 7) {
+                this.arrValue.push({
+                  value: val['qty'],
+                  date: setDateToLocalDate,
+                });
+                return setDateToLocalDate;
+              } else {
+                return setDateToLocalDate;
+              }
+            });
+          const sortDataValueAndPrice = this.arrValue;
 
           const showDate = sortDataValueAndPrice.map((data) => data.date);
           let countIndex = -1;
@@ -94,6 +95,9 @@ export class StockComponent implements OnInit {
             }
           });
           this.lineChartLabels = [...new Set(showDate)];
+          console.log('lineChartLabels', this.lineChartLabels);
+          console.log('lineChartData', this.lineChartData[0].data);
+
           ///// end set 7 day sales for draft chart /////
 
           ///// list most best seller /////

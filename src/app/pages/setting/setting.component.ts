@@ -70,6 +70,27 @@ export class SettingComponent implements OnInit {
     });
   }
 
+  // uploadImage(event: any) {
+  //   const file = event.target.files[0];
+  //   const filePath = `images/${file.name}`;
+  //   const fileRef = this.afStorage.ref(filePath);
+  //   const task = this.afStorage.upload(filePath, file);
+
+  //   task
+  //     .snapshotChanges()
+  //     .pipe(
+  //       finalize(() => {
+  //         this.downloadURL = fileRef.getDownloadURL();
+  //         this.downloadURL.subscribe((url) => {
+  //           this.afs
+  //             .collection('images')
+  //             .add({ downloadURL: url, path: filePath });
+  //         });
+  //       })
+  //     )
+  //     .subscribe();
+  // }
+
   onBack() {
     this.route.navigate(['menu']);
   }

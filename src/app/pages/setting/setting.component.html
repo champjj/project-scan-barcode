@@ -25,12 +25,15 @@
       [placeholder]="'discountMember'"
       [control]="getSettingInfoByName('discountMember')"
     ></c-input>
-    <c-input
+    <!-- <c-input
       [id]="'imageShop'"
       [inputType]="'text'"
       [placeholder]="'imageShop'"
       [control]="getSettingInfoByName('imageShop')"
-    ></c-input>
+    ></c-input> -->
+    <!-- <input type="file" (change)="uploadImage($event)">
+    <br>
+    <img [src]="downloadURL | async"> -->
     <div class="cover-btn">
       <button (click)="onSave()" mat-raised-button>Save</button>
       <button class="btn-back" (click)="onBack()" mat-raised-button>

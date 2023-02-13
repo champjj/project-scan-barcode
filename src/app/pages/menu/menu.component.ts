@@ -38,8 +38,18 @@ export class MenuComponent {
   ];
 
   getUserData = JSON.parse(localStorage.getItem('UData') as string);
+  // reloadPage = localStorage.getItem('reloadPage');
 
   constructor(private route: Router) {}
+
+  ngOnInit() {
+    // if (!localStorage.getItem('reloadPage')) {
+    //   localStorage.setItem('reloadPage', 'no reload');
+    //   location.reload();
+    // } else {
+    //   localStorage.removeItem('reloadPage');
+    // }
+  }
 
   onChangePage(link: string) {
     if (link == 'login') localStorage.removeItem('UData');

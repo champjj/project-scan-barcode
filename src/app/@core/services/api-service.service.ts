@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { IHistorySelling, IProduct } from '../models/products-models';
 import { IMember, IUser } from '../models/users-models';
 
@@ -8,7 +9,10 @@ import { IMember, IUser } from '../models/users-models';
 })
 export class ApiServiceService {
   getUser = JSON.parse(localStorage.getItem('UData') as string);
-  constructor(private firestore: AngularFirestore) {}
+  constructor(
+    private firestore: AngularFirestore,
+    private firestoreage: AngularFireStorage
+  ) {}
 
   ///// api user /////
   addNewUser(data: IUser) {
@@ -44,6 +48,12 @@ export class ApiServiceService {
       imageShop: data.imageShop,
     });
   }
+
+  uploadImageUser(event:any){
+    // const file = event
+    // const filePate = 
+  }
+
   ///// end api user /////
 
   ///// api product /////

@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
   registerForm = this.fb.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
+    confirmPassword: ['', Validators.required],
     shopname: ['', Validators.required],
     mobileNumber: ['', Validators.required],
     email: [''],
@@ -47,26 +48,33 @@ export class RegisterComponent implements OnInit {
 
   onRegister() {
     this.onClickBtn = true;
-
-    this.apiService
-      .queryUsername(this.getRegisterFormByName('username').value)
-      .pipe(
-        map((userData) => userData.length),
-        tap((data) => {
-          console.log(data);
-          if (data == 0) {
-            this.cacheUserData = data;
-            console.log('onRegister true');
-            this.addNewUser();
-          } else if (this.cacheUserData !== 0) {
-            console.log('onRegister false');
-            this.openDialog(1);
-            this.onClickBtn = false;
-          }
-        }),
-        shareReplay()
-      )
-      .subscribe();
+    if (
+      this.getRegisterFormByName('password').value ==
+      this.getRegisterFormByName('confirmPassword').value
+    ) {
+      this.apiService
+        .queryUsername(this.getRegisterFormByName('username').value)
+        .pipe(
+          map((userData) => userData.length),
+          tap((data) => {
+            console.log(data);
+            if (data == 0) {
+              this.cacheUserData = data;
+              console.log('onRegister true');
+              this.addNewUser();
+            } else if (this.cacheUserData !== 0) {
+              console.log('onRegister false');
+              this.openDialog(1);
+              this.onClickBtn = false;
+            }
+          }),
+          shareReplay()
+        )
+        .subscribe();
+    } else {
+      this.openDialog(4);
+      this.onClickBtn = false;
+    }
   }
 
   addNewUser() {
