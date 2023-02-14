@@ -1,4 +1,33 @@
 <div class="edit-product">
+  <div class="search-product">
+    <c-input
+      [placeholder]="'Name'"
+      [control]="getSearchFormByName('searchName')"
+    ></c-input>
+    <div class="search-product-line-2">
+      <c-select
+        [placeholder]="'Category'"
+        [selected]="selectCat"
+        [control]="getSearchFormByName('searchCategory')"
+        [items]="catList"
+      ></c-select>
+      <button
+        [disabled]="disabledSearchBtn()"
+        (click)="onSearch()"
+        class="search-product-line-2-btn"
+        mat-raised-button
+      >
+        SEARCH
+      </button>
+      <button
+        (click)="onClearSearch()"
+        class="search-product-line-2-btn"
+        mat-raised-button
+      >
+        CLEAR
+      </button>
+    </div>
+  </div>
   <div class="cover-list-product" *ngIf="productList$ | async as product">
     <div class="cover-card-product" *ngFor="let item of product">
       <mat-card class="card-product">

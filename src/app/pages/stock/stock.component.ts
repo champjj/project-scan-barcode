@@ -68,7 +68,7 @@ export class StockComponent implements OnInit {
               });
 
               ///// set 7 day sales for draft chart /////
-              if (val['timeStamp'] > this.today - 86400000 * 7) {
+              if (val['timeStamp'] > this.today - 86400000 * 8) {
                 this.arrValue.push({
                   value: val['qty'],
                   date: setDateToLocalDate,
@@ -139,7 +139,7 @@ export class StockComponent implements OnInit {
 
           const setTopSeller = mergeProductByName
             .sort((a: any, b: any) => b['qty'] - a['qty'])
-            .slice(0, 10);
+            .slice(0, 5);
 
           console.log(setTopSeller);
           this.bestSellerList.next(setTopSeller);

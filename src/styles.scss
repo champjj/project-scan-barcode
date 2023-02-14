@@ -17,6 +17,12 @@ body {
   font-family: "Arial-Rounded-MT", Roboto, "Helvetica Neue", sans-serif;
 
   //// custom style
+
+  .mat-button-wrapper {
+    font-weight: 600;
+    font-size: 14px;
+  }
+
   .mat-flat-button.mat-primary.mat-button-disabled,
   .mat-flat-button.mat-accent.mat-button-disabled,
   .mat-flat-button.mat-warn.mat-button-disabled,

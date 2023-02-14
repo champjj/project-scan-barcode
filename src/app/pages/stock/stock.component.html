@@ -13,6 +13,25 @@
   </div>
 
   <hr />
+  <ng-container *ngIf="bestSellerList$ | async as bestList">
+    <div class="cover-product-list">
+      <label class="cover-product-list-label"><b>Best Seller</b></label>
+      <table class="table-best-seller">
+        <tr>
+          <th>Product name</th>
+          <th>Category</th>
+          <th>Sold amount</th>
+        </tr>
+        <tr *ngFor="let item of bestList">
+          <td>{{ item.productName }}</td>
+          <td>{{ item.category }}</td>
+          <td class="text-center">{{ item.qty }}</td>
+        </tr>
+      </table>
+    </div>
+  </ng-container>
+  <hr />
+
   <ng-container *ngIf="listProductInWeek$ | async as productInWeek">
     <div class="cover-product-list">
       <label class="cover-product-list-label"
@@ -32,24 +51,6 @@
       </table>
     </div></ng-container
   >
-  <hr />
-  <ng-container *ngIf="bestSellerList$ | async as bestList">
-    <div class="cover-product-list">
-      <label class="cover-product-list-label"><b>Best Seller</b></label>
-      <table class="table-best-seller">
-        <tr>
-          <th>Product name</th>
-          <th>Category</th>
-          <th>Sold amount</th>
-        </tr>
-        <tr *ngFor="let item of bestList">
-          <td>{{ item.productName }}</td>
-          <td>{{ item.category }}</td>
-          <td class="text-center">{{ item.qty }}</td>
-        </tr>
-      </table>
-    </div>
-  </ng-container>
 </div>
 <ng-template #loading>
   <mat-spinner class="loading-spinner"></mat-spinner>
