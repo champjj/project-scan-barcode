@@ -102,16 +102,18 @@ export class EditSelectProductComponent implements OnInit {
       .pipe(
         tap((products) => {
           console.log(products);
-          const filerBarcode = products.filter(
+
+          const removeCurrentItem = products.filter(
+            (value) => value['productCode'] !== code
+          );
+
+          const filerBarcode = removeCurrentItem.filter(
             (product) =>
               product['productCode'] ==
               this.getEditProductFormByName('productCode').value
           );
-          if (
-            filerBarcode.length < 1 &&
-            this.cacheEditProduct == false &&
-            code == this.getEditProductFormByName('productCode').value
-          ) {
+
+          if (filerBarcode.length < 1 && this.cacheEditProduct == false) {
             const dataProduct: IProduct = {
               productName: this.getEditProductFormByName('productName').value,
               productCode: this.getEditProductFormByName('productCode').value,
