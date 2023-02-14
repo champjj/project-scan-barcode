@@ -97,7 +97,7 @@ export class EditSelectProductComponent implements OnInit {
 
   onSave() {
     this.disbledBtnWhenLoad = true;
-
+    const code = this.router.snapshot.paramMap.get('code');
     this.serviceEditProduct.productInStockEditPage$
       .pipe(
         tap((products) => {
@@ -107,7 +107,11 @@ export class EditSelectProductComponent implements OnInit {
               product['productCode'] ==
               this.getEditProductFormByName('productCode').value
           );
-          if (filerBarcode.length < 1 && this.cacheEditProduct == false) {
+          if (
+            filerBarcode.length < 1 &&
+            this.cacheEditProduct == false &&
+            code == this.getEditProductFormByName('productCode').value
+          ) {
             const dataProduct: IProduct = {
               productName: this.getEditProductFormByName('productName').value,
               productCode: this.getEditProductFormByName('productCode').value,

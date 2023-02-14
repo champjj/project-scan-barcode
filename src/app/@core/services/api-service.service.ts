@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { finalize } from 'rxjs';
 import { IHistorySelling, IProduct } from '../models/products-models';
 import { IMember, IUser } from '../models/users-models';
 
@@ -47,11 +48,6 @@ export class ApiServiceService {
       discountMember: data.discountMember,
       imageShop: data.imageShop,
     });
-  }
-
-  uploadImageUser(event: any) {
-    // const file = event
-    // const filePate =
   }
 
   ///// end api user /////
@@ -205,4 +201,28 @@ export class ApiServiceService {
   }
 
   ///// end api history /////
+
+  ///// api upload image /////
+
+  uploadImageUser(event: any) {
+    // const file = event.target.files[0];
+    // const filePath = `images/${file.name}`;
+    // const fileRef = this.firestoreage.ref(filePath);
+    // const task = this.firestoreage.upload(filePath, file);
+    // task
+    //   .snapshotChanges()
+    //   .pipe(
+    //     finalize(() => {
+    //       const downloadURL = fileRef.getDownloadURL();
+    //       downloadURL.subscribe((url) => {
+    //         this.afs
+    //           .collection('images')
+    //           .add({ downloadURL: url, path: filePath });
+    //       });
+    //     })
+    //   )
+    //   .subscribe();
+  }
+
+  ///// end api upload image /////
 }
