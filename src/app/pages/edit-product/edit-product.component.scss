@@ -19,8 +19,10 @@
     &-line-2 {
       display: flex;
       justify-content: space-between;
+      column-gap: 6px;
       &-btn {
         height: 100%;
+        width: auto;
         margin: 14px 0 0 0;
       }
     }

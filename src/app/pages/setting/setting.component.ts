@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IUser } from 'src/app/@core/models/users-models';
 import { ApiServiceService } from 'src/app/@core/services/api-service.service';
@@ -16,7 +16,7 @@ export class SettingComponent implements OnInit {
     password: [''],
     shopname: [''],
     mobileNumber: [''],
-    email: [''],
+    email: ['', [Validators.email]],
     discountMember: [''],
     imageShop: [''],
   });
@@ -44,6 +44,10 @@ export class SettingComponent implements OnInit {
       discountMember: this.getUserData.discountMember,
       imageShop: this.getUserData.imageShop,
     });
+  }
+
+  disabledSettingBtn() {
+    return this.settingInfo.invalid;
   }
 
   getSettingInfoByName(name: string) {

@@ -16,7 +16,7 @@
     <c-input
       [id]="'email'"
       [inputType]="'text'"
-      [placeholder]="'email'"
+      [placeholder]="'E-Mail'"
       [control]="getSettingInfoByName('email')"
     ></c-input>
     <c-input
@@ -35,7 +35,7 @@
     <br>
     <img [src]="downloadURL | async"> -->
     <div class="cover-btn">
-      <button (click)="onSave()" mat-raised-button>Save</button>
+      <button [disabled]="disabledSettingBtn()" (click)="onSave()" mat-raised-button>Save</button>
       <button class="btn-back" (click)="onBack()" mat-raised-button>
         Back
       </button>
