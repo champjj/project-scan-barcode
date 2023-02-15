@@ -5,12 +5,11 @@
       [control]="getSearchFormByName('searchName')"
     ></c-input>
     <div class="search-product-line-2">
-      <c-select
+      <c-auto-complete
         [placeholder]="'Category'"
-        [selected]="selectCat"
         [control]="getSearchFormByName('searchCategory')"
-        [items]="catList"
-      ></c-select>
+        [options]="catList"
+      ></c-auto-complete>
       <button
         [disabled]="disabledSearchBtn()"
         (click)="onSearch()"

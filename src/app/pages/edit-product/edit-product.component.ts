@@ -48,21 +48,33 @@ export class EditProductComponent implements OnInit {
   initDataProducts() {
     if (!this.shopData.username) {
       location.reload();
+    } else {
+      this.apiService
+        .getProducts()
+        .pipe(
+          tap((productList: any) => {
+            this.serviceEditProduct.setProductCode(productList);
+            this.productList.next(
+              productList.sort((a: any, b: any) =>
+                a.productName.localeCompare(b.productName)
+              )
+            );
+            this.oldDataProductList.next(productList);
+            ///// set Category
+            productList
+              .map((value: any) => value.category)
+              .forEach((val: any) => {
+                if (!this.catList.includes(val)) {
+                  this.catList.push(val);
+                }
+              });
+            this.catList.sort();
+          })
+        )
+        .subscribe((productList) => {
+          console.log(productList);
+        });
     }
-    this.apiService
-      .getProducts()
-      .pipe(
-        tap((productList: any) => {
-          this.serviceEditProduct.setProductCode(productList);
-          this.productList.next(productList);
-          this.oldDataProductList.next(productList);
-          ///// set Category
-          productList.map((value: any) => this.catList.push(value.category));
-        })
-      )
-      .subscribe((productList) => {
-        console.log({ productList });
-      });
   }
 
   disabledSearchBtn() {

@@ -35,7 +35,13 @@
     <br>
     <img [src]="downloadURL | async"> -->
     <div class="cover-btn">
-      <button [disabled]="disabledSettingBtn()" (click)="onSave()" mat-raised-button>Save</button>
+      <button
+        [disabled]="disabledSettingBtn()"
+        (click)="onSave()"
+        mat-raised-button
+      >
+        Save
+      </button>
       <button class="btn-back" (click)="onBack()" mat-raised-button>
         Back
       </button>

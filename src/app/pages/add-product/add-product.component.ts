@@ -27,6 +27,7 @@ export class AddProductComponent implements OnInit {
   getUserData = JSON.parse(localStorage.getItem('UData') as string);
 
   disbledBtnWhenLoad = false;
+  catList: string[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -40,7 +41,33 @@ export class AddProductComponent implements OnInit {
     return this.addProduct.invalid || this.disbledBtnWhenLoad;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initData();
+  }
+
+  initData() {
+    if (!this.getUserData.username) {
+      location.reload();
+    } else {
+      this.apiService
+        .getProducts()
+        .pipe(
+          tap((productList) => {
+            ///// set Category
+            productList
+              .map((value: any) => value.category)
+              .forEach((val: any) => {
+                if (!this.catList.includes(val)) {
+                  this.catList.push(val);
+                }
+              });
+            this.catList.sort();
+            console.log(this.catList);
+          })
+        )
+        .subscribe();
+    }
+  }
 
   getAddProductFormByName(name: string) {
     return this.addProduct.get(name) as FormControl;
@@ -123,14 +150,12 @@ export class DialogAddProduct {
   };
   constructor(
     public dialogRef: MatDialogRef<DialogAddProduct>,
-    private serviceDataAddProduct: ServiceDataAddProductService
+    private serviceDataAddProduct: ServiceDataAddProductService,
+    private apiService: ApiServiceService
   ) {}
 
   ngOnInit(): void {
     this.onClickInit();
-    if (!this.shopData.username) {
-      location.reload();
-    }
   }
 
   onClickInit() {

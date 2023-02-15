@@ -11,14 +11,21 @@ import { CScanBarcodeComponent } from './c-scan-barcode/c-scan-barcode.component
 import { DirectiveModule } from '../@core/directives/directive.module';
 import { CSelectComponent } from './c-select/c-select.component';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
-
-const COMPONENT = [CInputComponent, CSelectComponent, CScanBarcodeComponent];
+import { CAutoCompleteComponent } from './c-auto-complete/c-auto-complete.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+const COMPONENT = [
+  CInputComponent,
+  CSelectComponent,
+  CScanBarcodeComponent,
+  CAutoCompleteComponent,
+];
 const MODULES = [
   ReactiveFormsModule,
   FormsModule,
   MatInputModule,
   MatSelectModule,
   DirectiveModule,
+  MatAutocompleteModule,
 ];
 
 @NgModule({

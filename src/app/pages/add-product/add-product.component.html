@@ -27,13 +27,12 @@
       [inputType]="'number'"
       [control]="getAddProductFormByName('price')"
     ></c-input>
-    <c-input
-      [id]="'category'"
-      [inputType]="'text'"
+    <c-auto-complete
       [placeholder]="'category'"
-      [inputType]="'text'"
       [control]="getAddProductFormByName('category')"
-    ></c-input>
+      [options]="catList"
+    ></c-auto-complete>
+
     <c-input
       [id]="'quantity'"
       [inputType]="'text'"
