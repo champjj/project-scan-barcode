@@ -133,7 +133,8 @@
     <c-input
       [control]="getSellingFormByName('mobileMember')"
       [placeholder]="'Phone number'"
-      [inputType]="'number'"
+      [inputType]="'text'"
+      [mask]="'000-000-0000'"
     ></c-input>
     <button
       [disabled]="getSellingFormByName('mobileMember').invalid"

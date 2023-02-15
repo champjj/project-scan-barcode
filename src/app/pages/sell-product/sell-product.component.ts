@@ -26,10 +26,7 @@ export class SellProductComponent implements OnInit {
   shopData = JSON.parse(localStorage.getItem('UData') as string);
 
   sellingForm = this.fb.group({
-    mobileMember: [
-      '',
-      [Validators.required, Validators.minLength(10), Validators.maxLength(10)],
-    ],
+    mobileMember: ['', [Validators.required]],
     manualProductCode: [''],
   });
 
@@ -95,6 +92,9 @@ export class SellProductComponent implements OnInit {
   }
 
   initGetDataProducts() {
+    if (!this.shopData.username) {
+      location.reload();
+    }
     this.apiService
       .getProducts()
       .pipe(
@@ -411,10 +411,7 @@ export class DialogSelling {
 
   registerMemberForm = this.fb.group({
     memberName: ['', [Validators.required]],
-    memberNumber: [
-      '',
-      [Validators.required, Validators.minLength(10), Validators.maxLength(10)],
-    ],
+    memberNumber: ['', [Validators.required]],
   });
 
   today = new Date();

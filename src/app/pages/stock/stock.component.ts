@@ -40,6 +40,8 @@ export class StockComponent implements OnInit {
 
   today = new Date().getTime();
 
+  shopData = JSON.parse(localStorage.getItem('UData') as string);
+
   loadingSpinner = true;
 
   constructor(private route: Router, private apiService: ApiServiceService) {}
@@ -49,6 +51,9 @@ export class StockComponent implements OnInit {
   }
 
   initGetHistorySelling() {
+    if (!this.shopData.username) {
+      location.reload();
+    }
     this.apiService
       .getHistory()
       .pipe(

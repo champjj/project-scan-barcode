@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import {
   FormBuilder,
@@ -6,7 +6,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { IUser } from 'src/app/@core/models/users-models';
@@ -25,6 +29,8 @@ export class LoginComponent implements OnInit {
     password: ['', Validators.required],
   });
 
+  loadingLogin = false;
+
   constructor(
     private fb: FormBuilder,
     private route: Router,
@@ -37,7 +43,7 @@ export class LoginComponent implements OnInit {
   }
 
   disabledButton() {
-    return this.loginForm.invalid;
+    return this.loginForm.invalid || this.loadingLogin;
   }
 
   getLoginFormByName(name: string) {
@@ -52,7 +58,7 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     const { username, password } = this.loginForm.value;
-
+    this.loadingLogin = true;
     this.apiService
       .queryUsername(username)
       .pipe(
@@ -63,20 +69,22 @@ export class LoginComponent implements OnInit {
               this.route.navigate(['menu']);
               localStorage.setItem('UData', JSON.stringify(userData[0]));
             } else {
-              this.openDialog();
+              this.openDialog('wrong-password');
             }
+          } else {
+            this.openDialog('no-user');
           }
         })
       )
-      .subscribe();
+      .subscribe(() => (this.loadingLogin = false));
   }
 
   onRegister() {
     this.route.navigate(['register']);
   }
 
-  openDialog(): void {
-    this.dialog.open(DialogLogin, {});
+  openDialog(condition: string): void {
+    this.dialog.open(DialogLogin, { data: condition });
   }
 }
 
@@ -85,4 +93,13 @@ export class LoginComponent implements OnInit {
   templateUrl: './dialog-login.html',
   styleUrls: ['./login.component.scss'],
 })
-export class DialogLogin {}
+export class DialogLogin {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<DialogLogin>
+  ) {}
+
+  ngOnInit(): void {
+    console.log(this.data);
+  }
+}

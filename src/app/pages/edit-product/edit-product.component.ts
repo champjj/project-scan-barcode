@@ -23,6 +23,8 @@ export class EditProductComponent implements OnInit {
   oldDataProductList = new BehaviorSubject<IProduct[] | undefined>(undefined);
   oldDataProductList$ = this.oldDataProductList.asObservable();
 
+  shopData = JSON.parse(localStorage.getItem('UData') as string);
+
   selectCat = '';
   catList: string[] = [];
 
@@ -44,6 +46,9 @@ export class EditProductComponent implements OnInit {
   }
 
   initDataProducts() {
+    if (!this.shopData.username) {
+      location.reload();
+    }
     this.apiService
       .getProducts()
       .pipe(

@@ -55,6 +55,9 @@ export class ApiServiceService {
   ///// api product /////
 
   getProducts() {
+    if (!this.getUser) {
+      location.reload();
+    }
     return this.firestore
       .collection('users')
       .doc(this.getUser.username)

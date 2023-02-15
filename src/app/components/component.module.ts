@@ -10,8 +10,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { CScanBarcodeComponent } from './c-scan-barcode/c-scan-barcode.component';
 import { DirectiveModule } from '../@core/directives/directive.module';
 import { CSelectComponent } from './c-select/c-select.component';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
-const COMPONENT = [CInputComponent, CSelectComponent];
+const COMPONENT = [CInputComponent, CSelectComponent, CScanBarcodeComponent];
 const MODULES = [
   ReactiveFormsModule,
   FormsModule,
@@ -21,8 +22,9 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENT, CScanBarcodeComponent],
-  imports: [CommonModule, ...MODULES],
+  declarations: [...COMPONENT],
+  imports: [CommonModule, ...MODULES, NgxMaskDirective, NgxMaskPipe],
   exports: [...COMPONENT, ...MODULES],
+  providers: [provideNgxMask()],
 })
 export class ComponentModule {}

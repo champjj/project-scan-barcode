@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PageRoutingModule } from './page-routing.module';
 import { ComponentModule } from '../components/component.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from './login/login.component';
+import { DialogLogin, LoginComponent } from './login/login.component';
 import { MenuComponent } from './menu/menu.component';
 
 ///// materail
@@ -59,6 +59,7 @@ import {
     DialogEditStatus,
     DialogSelling,
     DialogStatusEditPage,
+    DialogLogin,
     //////////
   ],
   imports: [

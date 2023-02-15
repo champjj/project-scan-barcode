@@ -99,6 +99,8 @@ export class AddProductComponent implements OnInit {
 export class DialogAddProduct {
   productCode: string = '';
 
+  shopData = JSON.parse(localStorage.getItem('UData') as string);
+
   ///// scanner
   showData: any;
 
@@ -126,6 +128,9 @@ export class DialogAddProduct {
 
   ngOnInit(): void {
     this.onClickInit();
+    if (!this.shopData.username) {
+      location.reload();
+    }
   }
 
   onClickInit() {

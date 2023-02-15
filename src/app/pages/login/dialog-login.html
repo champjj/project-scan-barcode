@@ -1,4 +1,7 @@
 <div class="dialog-login">
   <label mat-dialog-title><b>Login</b></label>
-  <p>Wrong Password</p>
+  <ng-container [ngSwitch]="data">
+    <p *ngSwitchCase="'wrong-password'">Wrong Password</p>
+    <p *ngSwitchCase="'no-user'">Register before login</p>
+  </ng-container>
 </div>

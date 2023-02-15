@@ -101,8 +101,6 @@ export class EditSelectProductComponent implements OnInit {
     this.serviceEditProduct.productInStockEditPage$
       .pipe(
         tap((products) => {
-          console.log(products);
-
           const removeCurrentItem = products.filter(
             (value) => value['productCode'] !== code
           );
