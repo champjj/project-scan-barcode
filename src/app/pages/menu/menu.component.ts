@@ -43,12 +43,12 @@ export class MenuComponent {
   constructor(private route: Router) {}
 
   ngOnInit() {
-    // if (!localStorage.getItem('reloadPage')) {
-    //   localStorage.setItem('reloadPage', 'no reload');
-    //   location.reload();
-    // } else {
-    //   localStorage.removeItem('reloadPage');
-    // }
+    if (!localStorage.getItem('reloadPage')) {
+      localStorage.setItem('reloadPage', 'no reload');
+      location.reload();
+    } else {
+      localStorage.removeItem('reloadPage');
+    }
   }
 
   onChangePage(link: string) {
