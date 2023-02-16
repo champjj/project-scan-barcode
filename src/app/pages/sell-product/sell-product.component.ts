@@ -338,17 +338,17 @@ export class SellProductComponent implements OnInit {
         tap(() => {
           if (this.showData) {
             this.showData = action.devices._value;
-          } else {
-            location.reload();
           }
         })
       )
       .subscribe(
         () => {
-          this.setCameraFacingback(action, this.showData);
+          this.showData = action.devices._value;
         },
         () => {},
-        () => {}
+        () => {
+          this.setCameraFacingback(action, this.showData);
+        }
       );
   }
 
