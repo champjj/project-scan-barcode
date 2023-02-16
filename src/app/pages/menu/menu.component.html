@@ -1,6 +1,14 @@
 <div class="menu-page">
   <mat-card class="card-info-user">
-    <img src="../../../assets/images/default_user.png" alt="" />
+    <img
+      class="card-info-user-image-shop"
+      [src]="
+        getUserData.imageShop
+          ? getUserData.imageShop
+          : '../../../assets/images/default_user.png'
+      "
+      alt=""
+    />
     <ul>
       <li>
         <label>{{ getUserData.shopname }}</label>

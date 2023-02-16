@@ -5,6 +5,15 @@ import { finalize } from 'rxjs';
 import { IHistorySelling, IProduct } from '../models/products-models';
 import { IMember, IUser } from '../models/users-models';
 
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from 'firebase/storage';
+import { initializeApp } from 'firebase/app';
+import { environment } from 'src/environments/environment.prod';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -205,27 +214,33 @@ export class ApiServiceService {
 
   ///// end api history /////
 
-  ///// api upload image /////
+  // ///// api upload image /////
 
-  uploadImageUser(event: any) {
-    // const file = event.target.files[0];
-    // const filePath = `images/${file.name}`;
-    // const fileRef = this.firestoreage.ref(filePath);
-    // const task = this.firestoreage.upload(filePath, file);
-    // task
-    //   .snapshotChanges()
-    //   .pipe(
-    //     finalize(() => {
-    //       const downloadURL = fileRef.getDownloadURL();
-    //       downloadURL.subscribe((url) => {
-    //         this.afs
-    //           .collection('images')
-    //           .add({ downloadURL: url, path: filePath });
-    //       });
-    //     })
-    //   )
-    //   .subscribe();
-  }
+  // async uploadImageUser(event: any) {
+  //   const file = event.target.files[0];
+  //   const storage = getStorage(initializeApp(environment.firebaseConfig));
+  //   const storageRef = ref(storage, `${this.getUser.username}/${file.name}`);
+  //   const uploadTask = uploadBytesResumable(storageRef, file);
 
-  ///// end api upload image /////
+  //   return uploadTask.on(
+  //     'state_changed',
+  //     (snapshot) => {
+  //       // Upload progress
+  //       const progress =
+  //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+  //       console.log(`Upload is ${progress}% done`);
+  //     },
+  //     (error) => {
+  //       // Error uploading file
+  //       console.error(error);
+  //     },
+  //     async () => {
+  //       // Upload success
+  //       const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+  //       console.log(`File available at ${downloadURL}`);
+  //     }
+  //   );
+  // }
+
+  // ///// end api upload image /////
 }

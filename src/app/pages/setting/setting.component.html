@@ -1,6 +1,14 @@
 <div class="setting-page">
   <div class="cover-info">
-    <img src="../../../assets/images/default_user.png" alt="" />
+    <img
+      style="width: 48px; height: auto"
+      [src]="
+        getUserData.imageShop
+          ? getUserData.imageShop
+          : '../../../assets/images/default_user.png'
+      "
+      alt=""
+    />
     <c-input
       [id]="'shopName'"
       [inputType]="'text'"
@@ -25,15 +33,30 @@
       [placeholder]="'discountMember'"
       [control]="getSettingInfoByName('discountMember')"
     ></c-input>
-    <!-- <c-input
-      [id]="'imageShop'"
-      [inputType]="'text'"
-      [placeholder]="'imageShop'"
-      [control]="getSettingInfoByName('imageShop')"
-    ></c-input> -->
-    <!-- <input type="file" (change)="uploadImage($event)">
-    <br>
-    <img [src]="downloadURL | async"> -->
+    <input
+      #uploadImage
+      type="file"
+      accept="image/*"
+      (change)="onUploadImage($event)"
+      hidden
+    />
+    <button
+      *ngIf="!downloadURL"
+      (click)="uploadImage.click()"
+      mat-raised-button
+    >
+      Upload Image
+    </button>
+    <button
+      style="width: 110px"
+      *ngIf="downloadURL"
+      (click)="clearImage()"
+      mat-raised-button
+    >
+      Clear
+    </button>
+    <br />
+    <img *ngIf="downloadURL" class="preview-image" [src]="downloadURL" />
     <div class="cover-btn">
       <button
         [disabled]="disabledSettingBtn()"
@@ -47,4 +70,8 @@
       </button>
     </div>
   </div>
+</div>
+<div class="loading-fade" *ngIf="showSpinner">
+  <!-- <mat-spinner></mat-spinner> -->
+  <mat-spinner class="loading-fade-spinner"></mat-spinner>
 </div>

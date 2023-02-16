@@ -5,6 +5,14 @@ import { Router } from '@angular/router';
 import { IUser } from 'src/app/@core/models/users-models';
 import { ApiServiceService } from 'src/app/@core/services/api-service.service';
 
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from 'firebase/storage';
+import { initializeApp } from 'firebase/app';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.component.html',
@@ -23,6 +31,10 @@ export class SettingComponent implements OnInit {
 
   getUserData = JSON.parse(localStorage.getItem('UData') as string);
 
+  downloadURL = '';
+
+  showSpinner = false;
+
   constructor(
     private fb: FormBuilder,
     private location: Location,
@@ -35,15 +47,19 @@ export class SettingComponent implements OnInit {
   }
 
   initDataSetting() {
-    this.settingInfo.setValue({
-      username: this.getUserData.username,
-      password: this.getUserData.password,
-      shopname: this.getUserData.shopname,
-      mobileNumber: this.getUserData.mobileNumber,
-      email: this.getUserData.email,
-      discountMember: this.getUserData.discountMember,
-      imageShop: this.getUserData.imageShop,
-    });
+    if (this.getUserData) {
+      this.settingInfo.setValue({
+        username: this.getUserData.username,
+        password: this.getUserData.password,
+        shopname: this.getUserData.shopname,
+        mobileNumber: this.getUserData.mobileNumber,
+        email: this.getUserData.email,
+        discountMember: this.getUserData.discountMember,
+        imageShop: this.getUserData.imageShop,
+      });
+    } else {
+      location.reload();
+    }
   }
 
   disabledSettingBtn() {
@@ -62,7 +78,7 @@ export class SettingComponent implements OnInit {
       mobileNumber: this.getSettingInfoByName('mobileNumber').value,
       email: this.getSettingInfoByName('email').value,
       discountMember: this.getSettingInfoByName('discountMember').value,
-      imageShop: this.getSettingInfoByName('imageShop').value,
+      imageShop: this.downloadURL,
     };
     this.apiService.updateUserData(userData).then(() => {
       this.apiService
@@ -74,26 +90,46 @@ export class SettingComponent implements OnInit {
     });
   }
 
-  // uploadImage(event: any) {
-  //   const file = event.target.files[0];
-  //   const filePath = `images/${file.name}`;
-  //   const fileRef = this.afStorage.ref(filePath);
-  //   const task = this.afStorage.upload(filePath, file);
+  onUploadImage(event: any) {
+    console.log(event.target.files[0]);
 
-  //   task
-  //     .snapshotChanges()
-  //     .pipe(
-  //       finalize(() => {
-  //         this.downloadURL = fileRef.getDownloadURL();
-  //         this.downloadURL.subscribe((url) => {
-  //           this.afs
-  //             .collection('images')
-  //             .add({ downloadURL: url, path: filePath });
-  //         });
-  //       })
-  //     )
-  //     .subscribe();
-  // }
+    const file = event.target.files[0];
+    const storage = getStorage(initializeApp(environment.firebaseConfig));
+    const storageRef = ref(
+      storage,
+      `${this.getUserData.username}/${file.name}`
+    );
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        // Upload progress
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log(`Upload is ${progress}% done`);
+        this.showSpinner = true;
+      },
+      (error) => {
+        // Error uploading file
+        console.error(error);
+        this.showSpinner = false;
+      },
+      async () => {
+        // Upload success
+        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+        this.downloadURL = downloadURL;
+        console.log(`File available at ${downloadURL}`);
+        if (this.downloadURL) {
+          this.showSpinner = false;
+        }
+      }
+    );
+  }
+
+  clearImage() {
+    this.downloadURL = '';
+  }
 
   onBack() {
     this.route.navigate(['menu']);
