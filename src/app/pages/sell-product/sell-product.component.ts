@@ -353,7 +353,7 @@ export class SellProductComponent implements OnInit {
   }
 
   setCameraFacingback(action: any, data: IScannerDevice[]): void {
-    alert(data);
+    alert(JSON.parse(data));
     const findFacingback = data?.findIndex(
       (data: IScannerDevice) => data.label == 'camera2 0, facing back'
     );
