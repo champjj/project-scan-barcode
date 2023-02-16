@@ -336,6 +336,7 @@ export class SellProductComponent implements OnInit {
     action[fn]()
       .pipe(
         tap(() => {
+          alert(this.showData);
           this.showData = action.devices._value;
         })
       )
@@ -349,8 +350,6 @@ export class SellProductComponent implements OnInit {
   }
 
   setCameraFacingback(action: any, data: IScannerDevice[]): void {
-    alert(data);
-    alert('1');
     const findFacingback = data?.findIndex(
       (data: IScannerDevice) => data.label == 'camera2 0, facing back'
     );
