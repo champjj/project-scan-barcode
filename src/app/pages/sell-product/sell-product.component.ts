@@ -336,8 +336,11 @@ export class SellProductComponent implements OnInit {
     action[fn]()
       .pipe(
         tap(() => {
-          alert(this.showData);
-          this.showData = action.devices._value;
+          if (this.showData) {
+            this.showData = action.devices._value;
+          } else {
+            location.reload();
+          }
         })
       )
       .subscribe(
