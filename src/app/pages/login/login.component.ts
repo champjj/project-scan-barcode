@@ -36,7 +36,9 @@ export class LoginComponent implements OnInit {
     private route: Router,
     private apiService: ApiServiceService,
     public dialog: MatDialog
-  ) {}
+  ) {
+    document.body.style.backgroundColor = '#f3f3f3;';
+  }
 
   ngOnInit(): void {
     this.bypassLogin();
