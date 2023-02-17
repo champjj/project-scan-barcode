@@ -22,24 +22,41 @@
 </div> -->
 
 <div class="login-page">
-  <div class="cover-input">
-    <label class="text-login">Login</label>
-    <c-input
-      [id]="'username'"
-      [inputType]="'text'"
-      [placeholder]="'Username'"
-      [control]="getLoginFormByName('username')"
-    ></c-input>
-    <c-input
-      [id]="'password'"
-      [inputType]="'password'"
-      [placeholder]="'Password'"
-      [control]="getLoginFormByName('password')"
-    ></c-input>
-
-    <button (click)="onLogin()" [disabled]="disabledButton()" mat-raised-button>
-      Sign in
-    </button>
-    <a (click)="onRegister()" class="btn-text-register">Register</a>
+  <div class="background"></div>
+  <div class="container">
+    <div class="cover-text-login">
+      <p class="cover-text-login-1">Hello.</p>
+      <p class="cover-text-login-2">Login to your account</p>
+    </div>
+    <div class="cover-input">
+      <c-input
+        [id]="'username'"
+        [inputType]="'text'"
+        [placeholder]="'Username'"
+        [control]="getLoginFormByName('username')"
+      ></c-input>
+      <c-input
+        [id]="'password'"
+        [inputType]="'password'"
+        [placeholder]="'Password'"
+        [control]="getLoginFormByName('password')"
+      ></c-input>
+    </div>
+    <div class="cover-btn">
+      <button
+        class="cover-btn-login"
+        (click)="onLogin()"
+        [disabled]="disabledButton()"
+        mat-raised-button
+      >
+        Login
+      </button>
+      <p class="cover-btn-text">
+        Don’t have an account?
+        <a (click)="onRegister()" class="cover-btn-text-register"
+          ><b>Sign up</b></a
+        >
+      </p>
+    </div>
   </div>
 </div>

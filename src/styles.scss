@@ -4,23 +4,27 @@
   src: local("Arial-Rounded-MT"),
     url(./assets/font/Arial-Rounded-MT.Ttf) format("truetype");
 }
+@font-face {
+  font-family: "Inter";
+  src: local("Inter"), url(./assets/font/Inter.ttf) format("truetype");
+}
 html,
 * {
-  font-family: "Arial-Rounded-MT", Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Inter", Roboto, "Helvetica Neue", sans-serif;
 }
 body {
   height: 100%;
-  font-family: "Arial-Rounded-MT", Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Inter", Roboto, "Helvetica Neue", sans-serif;
 }
 body {
   margin: 0;
-  font-family: "Arial-Rounded-MT", Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Inter", Roboto, "Helvetica Neue", sans-serif;
 
   //// custom style
 
   .mat-button-wrapper {
     font-weight: 600;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .mat-flat-button.mat-primary.mat-button-disabled,
@@ -42,6 +46,24 @@ body {
     color: white;
     font-size: 16px;
   }
+  .mat-flat-button.mat-primary.mat-button-disabled,
+  .mat-flat-button.mat-accent.mat-button-disabled,
+  .mat-flat-button.mat-warn.mat-button-disabled,
+  .mat-flat-button.mat-button-disabled.mat-button-disabled,
+  .mat-raised-button.mat-primary.mat-button-disabled,
+  .mat-raised-button.mat-accent.mat-button-disabled,
+  .mat-raised-button.mat-warn.mat-button-disabled,
+  .mat-raised-button.mat-button-disabled.mat-button-disabled,
+  .mat-fab.mat-primary.mat-button-disabled,
+  .mat-fab.mat-accent.mat-button-disabled,
+  .mat-fab.mat-warn.mat-button-disabled,
+  .mat-fab.mat-button-disabled.mat-button-disabled,
+  .mat-mini-fab.mat-primary.mat-button-disabled,
+  .mat-mini-fab.mat-accent.mat-button-disabled,
+  .mat-mini-fab.mat-warn.mat-button-disabled,
+  .mat-mini-fab.mat-button-disabled.mat-button-disabled {
+    background-color: gray;
+  }
   .mat-flat-button,
   .mat-raised-button,
   .mat-fab,
@@ -55,6 +77,10 @@ body {
   }
   .mat-form-field-appearance-legacy .mat-form-field-underline {
     background-color: rgb(0 0 0 / 18%);
+  }
+  input.mat-input-element {
+    margin-top: -0.0625em;
+    padding: 0 0 14px 8px;
   }
   .text-center {
     text-align: center;
