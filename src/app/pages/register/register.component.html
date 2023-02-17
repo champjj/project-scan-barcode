@@ -1,50 +1,71 @@
 <div class="register-page">
-  <div class="cover-input">
-    <label class="text-login">Register</label>
-    <c-input
-      [id]="'username'"
-      [inputType]="'text'"
-      [placeholder]="'Username*'"
-      [control]="getRegisterFormByName('username')"
-    ></c-input>
-    <c-input
-      [id]="'password'"
-      [inputType]="'password'"
-      [placeholder]="'Password*'"
-      [control]="getRegisterFormByName('password')"
-    ></c-input>
-    <c-input
-      [id]="'password'"
-      [inputType]="'password'"
-      [placeholder]="'Confirm Password*'"
-      [control]="getRegisterFormByName('confirmPassword')"
-    ></c-input>
-    <c-input
-      [id]="'shopname'"
-      [inputType]="'shopname'"
-      [placeholder]="'shopname*'"
-      [control]="getRegisterFormByName('shopname')"
-    ></c-input>
-    <c-input
-      [id]="'mobileNumber'"
-      [inputType]="'text'"
-      [placeholder]="'mobileNumber*'"
-      [mask]="'000-000-0000'"
-      [control]="getRegisterFormByName('mobileNumber')"
-    ></c-input>
-    <c-input
-      [id]="'email'"
-      [inputType]="'email'"
-      [placeholder]="'E-mail'"
-      [control]="getRegisterFormByName('email')"
-    ></c-input>
-    <button
-      (click)="onRegister()"
-      [disabled]="disabledButton()"
-      mat-raised-button
-    >
-      Register
-    </button>
-    <button (click)="onBack()" mat-raised-button>Back</button>
+  <div class="cover-regiser-info">
+    <div class="header-register">
+      <img
+        class="arrow-back"
+        src="../../../assets/images/arrow-back.png"
+        alt=""
+        (click)="onBack()"
+      />
+      <div class="cover-text">
+        <p class="cover-text-register">Create</p>
+        <p class="cover-text-register">Your Account</p>
+      </div>
+    </div>
+    <div class="cover-input">
+      <c-input-ellipse
+        [id]="'username'"
+        [inputType]="'text'"
+        [label]="'Username'"
+        [required]="true"
+        [control]="getRegisterFormByName('username')"
+      ></c-input-ellipse>
+      <c-input-ellipse
+        [id]="'email'"
+        [inputType]="'email'"
+        [placeholder]="'someone@example.com'"
+        [label]="'E-mail'"
+        [control]="getRegisterFormByName('email')"
+      ></c-input-ellipse>
+      <c-input-ellipse
+        [id]="'password'"
+        [inputType]="'password'"
+        [label]="'Password'"
+        [required]="true"
+        [control]="getRegisterFormByName('password')"
+      ></c-input-ellipse>
+      <c-input-ellipse
+        [id]="'password'"
+        [inputType]="'password'"
+        [label]="'Confirm Password'"
+        [required]="true"
+        [control]="getRegisterFormByName('confirmPassword')"
+      ></c-input-ellipse>
+      <c-input-ellipse
+        [id]="'shopname'"
+        [inputType]="'shopname'"
+        [label]="'Shop Name'"
+        [required]="true"
+        [control]="getRegisterFormByName('shopname')"
+      ></c-input-ellipse>
+      <c-input-ellipse
+        [id]="'mobileNumber'"
+        [inputType]="'text'"
+        [label]="'Mobile Number'"
+        [required]="true"
+        [mask]="'000-000-0000'"
+        [control]="getRegisterFormByName('mobileNumber')"
+      ></c-input-ellipse>
+
+      <button
+        (click)="onRegister()"
+        [disabled]="disabledButton()"
+        mat-raised-button
+        class="btn-register"
+      >
+        Sign up
+      </button>
+    </div>
+    <!-- <button (click)="onBack()" mat-raised-button>Back</button> -->
   </div>
 </div>

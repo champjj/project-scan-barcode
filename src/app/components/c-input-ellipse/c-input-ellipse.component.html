@@ -1,0 +1,17 @@
+<div class="control">
+  <label class="label" for="{{ id }}">{{ label }}</label>
+  <div class="input-line">
+    <input
+      class="input"
+      [id]="id"
+      [formControl]="control"
+      [type]="inputType"
+      [required]="required"
+      [placeholder]="placeholder"
+      [maxlength]="maxlength"
+      [minlength]="minlength"
+      [mask]="mask"
+    />
+    <label *ngIf="required"><span style="color: #ca1b22">*</span></label>
+  </div>
+</div>

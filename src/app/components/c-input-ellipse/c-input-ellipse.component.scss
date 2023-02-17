@@ -1,0 +1,23 @@
+.control {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  .label {
+    color: #979797;
+  }
+  .input-line {
+    display: flex;
+  }
+  .input {
+    border: 0px;
+    width: 84%;
+    height: 35px;
+    border-radius: 16px;
+    margin: 0 9px 0 0;
+    padding: 0 0 0 15px;
+    background-color: #f3f3f3;
+  }
+  input.ng-invalid.ng-touched {
+    border: red 1.5px solid;
+  }
+}
