@@ -53,15 +53,11 @@
     &-text {
       color: #979797;
       margin: 20px 0 0 0;
+      font-size: 14px;
       &-register {
         color: #680011;
         text-decoration: underline;
       }
     }
-  }
-  .btn-text-register {
-    cursor: pointer;
-    text-align: center;
-    text-decoration: underline;
   }
 }
