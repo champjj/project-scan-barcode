@@ -5,6 +5,11 @@
     align-items: center;
     row-gap: 14px;
     margin: 4rem;
+    &-image {
+      width: 48px;
+      height: auto;
+      border-radius: 100%;
+    }
   }
   .cover-btn {
     display: flex;
@@ -12,6 +17,7 @@
   }
   .preview-image {
     max-width: 180px;
+    border-radius: 100%;
     border: 1px solid gray;
   }
 }
