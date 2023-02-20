@@ -87,7 +87,9 @@ export class SettingComponent implements OnInit {
         this.getSettingInfoByName('discountMember').value == ''
           ? 0
           : this.getSettingInfoByName('discountMember').value,
-      imageShop: this.downloadURL,
+      imageShop: this.downloadURL
+        ? this.downloadURL
+        : this.getUserData.imageShop,
     };
 
     this.onOpenDialog('save', userData);
