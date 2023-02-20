@@ -14,12 +14,14 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { CAutoCompleteComponent } from './c-auto-complete/c-auto-complete.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { CInputEllipseComponent } from './c-input-ellipse/c-input-ellipse.component';
+import { CInputNoBorderComponent } from './c-input-no-border/c-input-no-border.component';
 const COMPONENT = [
   CInputComponent,
   CSelectComponent,
   CScanBarcodeComponent,
   CAutoCompleteComponent,
   CInputEllipseComponent,
+  CInputNoBorderComponent,
 ];
 const MODULES = [
   ReactiveFormsModule,

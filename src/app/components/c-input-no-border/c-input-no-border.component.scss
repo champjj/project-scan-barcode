@@ -1,0 +1,31 @@
+.control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 -15px 0;
+  .label {
+    color: #979797;
+    font-size: 14px;
+  }
+  .input-line {
+    display: flex;
+  }
+  .input {
+    border: 0px;
+    height: 35px;
+    text-align: end;
+    background-color: transparent;
+  }
+  input.ng-invalid.ng-touched {
+    // border-bottom: red 1.5px solid;
+  }
+  input:focus {
+    outline: none;
+  }
+  input::placeholder {
+    color: #dbdbdb;
+  }
+}
+hr {
+  border: 0.5px solid #dcdcdc;
+}

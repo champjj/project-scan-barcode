@@ -1,73 +1,89 @@
 <div class="setting-page">
-  <div class="cover-info">
-    <img
-      class="cover-info-image"
-      [src]="
-        getUserData.imageShop
-          ? getUserData.imageShop
-          : '../../../assets/images/default_user.png'
-      "
-      alt=""
-    />
-    <c-input
-      [id]="'shopName'"
-      [inputType]="'text'"
-      [placeholder]="'shopName'"
-      [control]="getSettingInfoByName('shopname')"
-    ></c-input>
-    <c-input
-      [id]="'mobileNumber'"
-      [inputType]="'text'"
-      [placeholder]="'mobileNumber'"
-      [control]="getSettingInfoByName('mobileNumber')"
-    ></c-input>
-    <c-input
-      [id]="'email'"
-      [inputType]="'text'"
-      [placeholder]="'E-Mail'"
-      [control]="getSettingInfoByName('email')"
-    ></c-input>
-    <c-input
-      [id]="'discountMember'"
-      [inputType]="'number'"
-      [placeholder]="'discountMember'"
-      [control]="getSettingInfoByName('discountMember')"
-    ></c-input>
-    <input
-      #uploadImage
-      type="file"
-      accept="image/*"
-      (change)="onUploadImage($event)"
-      hidden
-    />
-    <button
-      *ngIf="!downloadURL"
-      (click)="uploadImage.click()"
-      mat-raised-button
-    >
-      Upload Image
-    </button>
-    <button
-      style="width: 110px"
-      *ngIf="downloadURL"
-      (click)="clearImage()"
-      mat-raised-button
-    >
-      Clear
-    </button>
-    <br />
-    <img *ngIf="downloadURL" class="preview-image" [src]="downloadURL" />
-    <div class="cover-btn">
+  <div class="background">
+    <img (click)="onBack()" src="../../../assets/images/close.svg" alt="" />
+    <b class="background-text">Edit Profile</b>
+    <img (click)="onSave()" src="../../../assets/images/check.svg" alt="" />
+  </div>
+  <div class="background-info">
+    <div class="cover-info">
+      <div class="cover-info-block-image">
+        <img
+          *ngIf="!downloadURL"
+          class="cover-info-block-image-img"
+          [src]="
+            getUserData.imageShop
+              ? getUserData.imageShop
+              : '../../../assets/images/default_user.png'
+          "
+          alt=""
+        />
+        <img
+          *ngIf="downloadURL"
+          class="cover-info-block-image-img"
+          [src]="downloadURL"
+          alt=""
+        />
+        <div (click)="uploadImage.click()" class="cover-info-block-image-btn">
+          <img src="../../../assets/images/photo_camera.png" alt="" />
+        </div>
+      </div>
+      <input
+        #uploadImage
+        type="file"
+        accept="image/*"
+        (change)="onUploadImage($event)"
+        hidden
+      />
+      <b *ngIf="downloadURL" class="cover-info-edit-img" (click)="clearImage()"
+        >Clear Picture</b
+      >
+      <b
+        *ngIf="!downloadURL"
+        class="cover-info-edit-img"
+        (click)="uploadImage.click()"
+        >Edit Picture</b
+      >
+      <c-input-no-border
+        [id]="'shopName'"
+        [inputType]="'text'"
+        style="width: 100%"
+        [label]="'Shop Name'"
+        [control]="getSettingInfoByName('shopname')"
+      ></c-input-no-border>
+      <c-input-no-border
+        [id]="'mobileNumber'"
+        [inputType]="'text'"
+        style="width: 100%"
+        [label]="'Mobile Number'"
+        [mask]="'XXX-XXX-0000'"
+        [hiddenInput]="true"
+        [control]="getSettingInfoByName('mobileNumber')"
+      ></c-input-no-border>
+      <c-input-no-border
+        [id]="'email'"
+        [inputType]="'text'"
+        style="width: 100%"
+        [label]="'Email'"
+        [control]="getSettingInfoByName('email')"
+      ></c-input-no-border>
+      <c-input-no-border
+        [id]="'discountMember'"
+        [inputType]="'number'"
+        style="width: 100%"
+        [label]="'Discount Member'"
+        [control]="getSettingInfoByName('discountMember')"
+      ></c-input-no-border>
       <button
-        [disabled]="disabledSettingBtn()"
-        (click)="onSave()"
+        class="cover-info-btn-logout"
+        (click)="onLogout()"
         mat-raised-button
       >
-        Save
+        Log out
       </button>
-      <button class="btn-back" (click)="onBack()" mat-raised-button>
-        Back
-      </button>
+    </div>
+    <div class="tap-delete">
+      <img src="../../../assets/images/delete_bin.png" alt="" />
+      <b>Delete Account ?</b>
     </div>
   </div>
 </div>

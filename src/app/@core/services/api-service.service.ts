@@ -213,34 +213,4 @@ export class ApiServiceService {
   }
 
   ///// end api history /////
-
-  // ///// api upload image /////
-
-  // async uploadImageUser(event: any) {
-  //   const file = event.target.files[0];
-  //   const storage = getStorage(initializeApp(environment.firebaseConfig));
-  //   const storageRef = ref(storage, `${this.getUser.username}/${file.name}`);
-  //   const uploadTask = uploadBytesResumable(storageRef, file);
-
-  //   return uploadTask.on(
-  //     'state_changed',
-  //     (snapshot) => {
-  //       // Upload progress
-  //       const progress =
-  //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-  //       console.log(`Upload is ${progress}% done`);
-  //     },
-  //     (error) => {
-  //       // Error uploading file
-  //       console.error(error);
-  //     },
-  //     async () => {
-  //       // Upload success
-  //       const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-  //       console.log(`File available at ${downloadURL}`);
-  //     }
-  //   );
-  // }
-
-  // ///// end api upload image /////
 }

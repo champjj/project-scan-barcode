@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IUser } from 'src/app/@core/models/users-models';
@@ -13,6 +13,11 @@ import {
 } from 'firebase/storage';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+  MatDialog,
+} from '@angular/material/dialog';
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.component.html',
@@ -20,10 +25,10 @@ import { environment } from 'src/environments/environment';
 })
 export class SettingComponent implements OnInit {
   settingInfo = this.fb.group({
-    username: [''],
+    username: ['', [Validators.required]],
     password: [''],
-    shopname: [''],
-    mobileNumber: [''],
+    shopname: ['', [Validators.required]],
+    mobileNumber: ['', [Validators.required]],
     email: ['', [Validators.email]],
     discountMember: [''],
     imageShop: [''],
@@ -39,7 +44,8 @@ export class SettingComponent implements OnInit {
     private fb: FormBuilder,
     private location: Location,
     private apiService: ApiServiceService,
-    private route: Router
+    private route: Router,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -77,9 +83,15 @@ export class SettingComponent implements OnInit {
       shopname: this.getSettingInfoByName('shopname').value,
       mobileNumber: this.getSettingInfoByName('mobileNumber').value,
       email: this.getSettingInfoByName('email').value,
-      discountMember: this.getSettingInfoByName('discountMember').value,
+      discountMember:
+        this.getSettingInfoByName('discountMember').value == ''
+          ? 0
+          : this.getSettingInfoByName('discountMember').value,
       imageShop: this.downloadURL,
     };
+
+    this.onOpenDialog('save', userData);
+
     this.apiService.updateUserData(userData).then(() => {
       this.apiService
         .queryUsername(userData.username)
@@ -127,6 +139,13 @@ export class SettingComponent implements OnInit {
     );
   }
 
+  onOpenDialog(condition: string, item: any) {
+    this.dialog
+      .open(DialogSetting, { data: { condition, item } })
+      .afterClosed()
+      .subscribe((value) => {});
+  }
+
   clearImage() {
     this.downloadURL = '';
   }
@@ -134,4 +153,22 @@ export class SettingComponent implements OnInit {
   onBack() {
     this.route.navigate(['menu']);
   }
+
+  onLogout() {
+    localStorage.removeItem('UData');
+    this.route.navigate(['login']);
+  }
+}
+
+@Component({
+  selector: 'dialog-setting',
+  templateUrl: './dialog-setting.html',
+  styleUrls: ['./setting.component.scss'],
+})
+export class DialogSetting {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<DialogSetting>
+  ) {}
 }

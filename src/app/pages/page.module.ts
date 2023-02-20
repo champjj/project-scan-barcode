@@ -29,7 +29,7 @@ import {
   EditProductComponent,
 } from './edit-product/edit-product.component';
 import { StockComponent } from './stock/stock.component';
-import { SettingComponent } from './setting/setting.component';
+import { DialogSetting, SettingComponent } from './setting/setting.component';
 import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 import {
   DialogRegister,
@@ -60,6 +60,7 @@ import {
     DialogSelling,
     DialogStatusEditPage,
     DialogLogin,
+    DialogSetting,
     //////////
   ],
   imports: [
