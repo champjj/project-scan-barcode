@@ -93,59 +93,86 @@ export class SettingComponent implements OnInit {
     };
 
     this.onOpenDialog('save', userData);
-
-    this.apiService.updateUserData(userData).then(() => {
-      this.apiService
-        .queryUsername(userData.username)
-        .subscribe((data) =>
-          localStorage.setItem('UData', JSON.stringify(data[0]))
-        );
-      this.route.navigate(['menu']);
-    });
   }
 
   onUploadImage(event: any) {
     console.log(event.target.files[0]);
-
     const file = event.target.files[0];
-    const storage = getStorage(initializeApp(environment.firebaseConfig));
-    const storageRef = ref(
-      storage,
-      `${this.getUserData.username}/${file.name}`
-    );
-    const uploadTask = uploadBytesResumable(storageRef, file);
+    console.log(file.type.includes('image'));
 
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {
-        // Upload progress
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(`Upload is ${progress}% done`);
-        this.showSpinner = true;
-      },
-      (error) => {
-        // Error uploading file
-        console.error(error);
-        this.showSpinner = false;
-      },
-      async () => {
-        // Upload success
-        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-        this.downloadURL = downloadURL;
-        console.log(`File available at ${downloadURL}`);
-        if (this.downloadURL) {
+    if (file.type.includes('image')) {
+      const storage = getStorage(initializeApp(environment.firebaseConfig));
+      const storageRef = ref(
+        storage,
+        `${this.getUserData.username}/${file.name}`
+      );
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          // Upload progress
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(`Upload is ${progress}% done`);
+          this.showSpinner = true;
+        },
+        (error) => {
+          // Error uploading file
+          console.error(error);
           this.showSpinner = false;
+        },
+        async () => {
+          // Upload success
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          this.downloadURL = downloadURL;
+          console.log(`File available at ${downloadURL}`);
+          if (this.downloadURL) {
+            this.showSpinner = false;
+          }
         }
-      }
-    );
+      );
+    } else {
+      this.onOpenDialog('error-image-type', '');
+    }
   }
 
   onOpenDialog(condition: string, item: any) {
     this.dialog
       .open(DialogSetting, { data: { condition, item } })
       .afterClosed()
-      .subscribe((value) => {});
+      .subscribe((value) => {
+        console.log(value.data);
+
+        switch (value.data.command) {
+          case 'confirm-save':
+            this.showSpinner = true;
+            this.apiService.updateUserData(value.data.item.item).then(() => {
+              this.apiService
+                .queryUsername(value.data.item.item.username)
+                .subscribe((data) => {
+                  localStorage.setItem('UData', JSON.stringify(data[0]));
+                  this.showSpinner = false;
+                  this.route.navigate(['menu']);
+                });
+            });
+            break;
+          case 'confirm-logout':
+            localStorage.removeItem('UData');
+            this.route.navigate(['login']);
+            break;
+          case 'confirm-delete':
+            this.showSpinner = true;
+            this.apiService
+              .deleteUserData(this.getUserData.username)
+              .finally(() => {
+                localStorage.removeItem('UData');
+                this.route.navigate(['login']);
+                this.showSpinner = false;
+              });
+            break;
+        }
+      });
   }
 
   clearImage() {
@@ -156,9 +183,12 @@ export class SettingComponent implements OnInit {
     this.route.navigate(['menu']);
   }
 
+  onDeleteDialog() {
+    this.onOpenDialog('delete', '');
+  }
+
   onLogout() {
-    localStorage.removeItem('UData');
-    this.route.navigate(['login']);
+    this.onOpenDialog('logout', '');
   }
 }
 
@@ -173,4 +203,20 @@ export class DialogSetting {
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<DialogSetting>
   ) {}
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    console.log(this.data);
+  }
+
+  onCloseDialog(command: string = '') {
+    switch (command) {
+      default:
+        this.dialogRef.close({
+          data: { command, item: this.data },
+        });
+        break;
+    }
+  }
 }

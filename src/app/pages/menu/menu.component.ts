@@ -31,12 +31,12 @@ export class MenuComponent {
       image: '../../../assets/images/product.png',
       link: 'stock',
     },
-    {
-      menuName: 'Log out',
-      // image: '../../../assets/images/product.png',
-      image: '',
-      link: 'login',
-    },
+    // {
+    //   menuName: 'Log out',
+    //   // image: '../../../assets/images/product.png',
+    //   image: '',
+    //   link: 'login',
+    // },
   ];
 
   getUserData = JSON.parse(localStorage.getItem('UData') as string);
@@ -48,7 +48,6 @@ export class MenuComponent {
     this.initData();
     if (!localStorage.getItem('reloadPage')) {
       localStorage.setItem('reloadPage', 'no reload');
-
       location.reload();
     } else {
       localStorage.removeItem('reloadPage');
@@ -61,7 +60,9 @@ export class MenuComponent {
       .pipe(
         tap((userData) => {
           console.log(userData);
-
+          if (!userData) {
+            localStorage.removeItem('UData');
+          }
           localStorage.setItem('UData', JSON.stringify(userData[0]));
         })
       )

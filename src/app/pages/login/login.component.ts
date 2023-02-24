@@ -55,6 +55,8 @@ export class LoginComponent implements OnInit {
   bypassLogin() {
     if (this.getUserDataLogin) {
       this.route.navigate(['menu']);
+    } else if (this.getUserDataLogin == undefined) {
+      localStorage.clear();
     }
   }
 

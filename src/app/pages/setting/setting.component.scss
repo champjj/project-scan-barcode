@@ -106,3 +106,34 @@
     border: 1px solid gray;
   }
 }
+
+///// dialog
+.dialog-setting {
+  p {
+    font-weight: 600;
+  }
+  .cover-logout {
+    .logout-btn {
+      display: flex;
+      justify-content: center;
+      column-gap: 20px;
+      &-confirm {
+      }
+      &-cancel {
+        background-color: gray;
+      }
+    }
+  }
+  .cover-save-data {
+    .confirm-save-btn {
+      display: flex;
+      justify-content: center;
+      column-gap: 20px;
+      &-confirm {
+      }
+      &-cancel {
+        background-color: gray;
+      }
+    }
+  }
+}

@@ -1,18 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { finalize } from 'rxjs';
 import { IHistorySelling, IProduct } from '../models/products-models';
 import { IMember, IUser } from '../models/users-models';
-
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from 'firebase/storage';
-import { initializeApp } from 'firebase/app';
-import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +12,11 @@ export class ApiServiceService {
   constructor(
     private firestore: AngularFirestore,
     private firestoreage: AngularFireStorage
-  ) {}
+  ) {
+    if (!localStorage.getItem('UData')) {
+      localStorage.removeItem('UData');
+    }
+  }
 
   ///// api user /////
   addNewUser(data: IUser) {
@@ -37,9 +31,9 @@ export class ApiServiceService {
     });
   }
 
-  getDataUser() {
-    return this.firestore.collection('users').valueChanges();
-  }
+  // getDataUser() {
+  //   return this.firestore.collection('users').valueChanges();
+  // }
 
   queryUsername(username: string) {
     return this.firestore
@@ -57,6 +51,10 @@ export class ApiServiceService {
       discountMember: data.discountMember,
       imageShop: data.imageShop,
     });
+  }
+
+  deleteUserData(username: string) {
+    return this.firestore.collection('users').doc(username).delete();
   }
 
   ///// end api user /////

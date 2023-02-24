@@ -1,6 +1,67 @@
 <div class="dialog-setting">
-  <span [ngSwitch]="">
-    <ng-container *ngSwitchCase="true"> </ng-container>
-    <ng-container *ngSwitchCase="false"> </ng-container>
+  <span [ngSwitch]="data.condition">
+    <ng-container *ngSwitchCase="'error-image-type'"
+      ><p>Please select only image file</p></ng-container
+    >
+    <div class="cover-logout" *ngSwitchCase="'logout'">
+      <p>Confirm Log out</p>
+      <div class="logout-btn">
+        <button
+          class="logout-btn-confirm"
+          mat-raised-button
+          (click)="onCloseDialog('confirm-logout')"
+        >
+          Confirm
+        </button>
+        <button
+          class="logout-btn-cancel"
+          mat-raised-button
+          (click)="onCloseDialog('close')"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+    <div class="cover-save-data" *ngSwitchCase="'save'">
+      <p>Confirm Save Data</p>
+      <div class="confirm-save-btn">
+        <button
+          class="confirm-save-btn-confirm"
+          mat-raised-button
+          (click)="onCloseDialog('confirm-save')"
+        >
+          Confirm
+        </button>
+        <button
+          class="confirm-save-btn-cancel"
+          mat-raised-button
+          (click)="onCloseDialog('close')"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+    <div class="cover-save-data" *ngSwitchCase="'delete'">
+      <p>Confirm Delete user</p>
+      <p style="color: red; font-size: 12px">
+        *All data on this user will be deleted and cannot be restored.
+      </p>
+      <div class="confirm-save-btn">
+        <button
+          class="confirm-save-btn-confirm"
+          mat-raised-button
+          (click)="onCloseDialog('confirm-delete')"
+        >
+          Confirm
+        </button>
+        <button
+          class="confirm-save-btn-cancel"
+          mat-raised-button
+          (click)="onCloseDialog('close')"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
   </span>
 </div>
