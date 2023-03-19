@@ -65,7 +65,7 @@ export class StockComponent implements OnInit {
                 new Date(b['timeStamp']).getTime()
             )
             .map((val, index, arr) => {
-              let setDateToLocalDate = new Date(
+              let setDateToLocalDate: any = new Date(
                 val['timeStamp']
               ).toLocaleDateString('th', {
                 month: '2-digit',
@@ -149,13 +149,54 @@ export class StockComponent implements OnInit {
           console.log(setTopSeller);
           this.bestSellerList.next(setTopSeller);
           ///// end list most best seller /////
+          const forShowDataProductInWeek = history;
 
           ///// product in week /////
-          const allListProductInWeek = mergeProductByName.sort(
-            (a: any, b: any) => b['qty'] - a['qty']
-          );
+          let mergeProductInWeek: any = [];
+          forShowDataProductInWeek
+            .sort((a: any, b: any) => b['qty'] - a['qty'])
+            .filter((sortData: any) => {
+              console.log(sortData);
 
-          this.listProductInWeek.next(allListProductInWeek);
+              if (sortData.timeStamp > this.today - 86400000 * 7) {
+                console.log('if', sortData);
+                return sortData;
+              }
+            })
+            .map((val, index, arr) => {
+              console.log('val', val['productName'], val['qty']);
+
+              const filterProduct = mergeProductInWeek.filter(
+                (value: any) => value.productName == val['productName']
+              );
+              // console.log(filterProduct.length);
+
+              if (filterProduct.length == 0) {
+                // console.log(true);
+
+                mergeProductInWeek.push(val);
+              } else {
+                // console.log(false);
+
+                const removeItem = mergeProductInWeek.filter(
+                  (value: any) => value.productName !== val['productName']
+                );
+
+                // console.log(removeItem);
+
+                const mergeDataForQty = {
+                  ...val,
+                  qty: filterProduct[0].qty + val['qty'],
+                };
+
+                // console.log(removeItem);
+                mergeProductInWeek = removeItem;
+                mergeProductInWeek.push(mergeDataForQty);
+                console.log('mergeProductInWeek in loop', mergeProductInWeek);
+              }
+            });
+          console.log('mergeProductInWeek', mergeProductInWeek);
+          this.listProductInWeek.next(mergeProductInWeek);
           ///// end product in week /////
         })
       )
